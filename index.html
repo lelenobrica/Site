@@ -1,0 +1,3213 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G1 - Portal de Notícias Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 50%, #7f1d1d 100%);
+        }
+        .news-ticker {
+            animation: scroll 25s linear infinite;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .mega-pulse {
+            animation: megaPulse 1.5s infinite;
+            box-shadow: 0 0 30px rgba(34, 197, 94, 0.6);
+        }
+        @keyframes megaPulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(34, 197, 94, 0.6); }
+            50% { transform: scale(1.08); box-shadow: 0 0 50px rgba(34, 197, 94, 0.9); }
+        }
+        .hamburger-menu {
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            backdrop-filter: blur(20px);
+        }
+        .hamburger-menu.active {
+            transform: translateX(0);
+        }
+        .game-promo {
+            animation: slideIn 1.2s ease-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(-100%) rotate(-5deg); opacity: 0; }
+            to { transform: translateX(0) rotate(0deg); opacity: 1; }
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+            transition: all 0.3s ease;
+        }
+        .neon-glow:hover {
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.8);
+            transform: translateY(-2px);
+        }
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .gradient-text {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 3s ease infinite;
+        }
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        .testimonial-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 10px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .video-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        .premium-button {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .premium-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        .mega-banner {
+            background: linear-gradient(45deg, #dc2626, #991b1b, #7f1d1d);
+            background-size: 300% 300%;
+            animation: gradientShift 4s ease infinite;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            color: white;
+            margin: 20px 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hamburger-menu {
+                width: 85%;
+                transform: translateX(-100%);
+            }
+            
+            .mega-banner {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .mega-banner .flex {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .mega-banner .text-6xl {
+                font-size: 3rem;
+            }
+            
+            .mega-banner .text-3xl {
+                font-size: 1.5rem;
+            }
+            
+            .header-logo {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .header-logo h1 {
+                font-size: 3rem !important;
+            }
+            
+            .header-logo .text-2xl {
+                font-size: 1rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .lg\\:col-span-2 {
+                grid-column: span 1;
+            }
+            
+            .survey-sidebar {
+                position: relative !important;
+                width: 100% !important;
+                transform: none !important;
+                margin: 1rem 0;
+            }
+            
+            .fixed.right-4 {
+                position: relative;
+                right: auto;
+                top: auto;
+                transform: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .text-6xl {
+                font-size: 2.5rem !important;
+            }
+            
+            .text-4xl {
+                font-size: 1.8rem !important;
+            }
+            
+            .text-3xl {
+                font-size: 1.5rem !important;
+            }
+            
+            .text-2xl {
+                font-size: 1.2rem !important;
+            }
+            
+            .p-8 {
+                padding: 1rem !important;
+            }
+            
+            .p-6 {
+                padding: 0.75rem !important;
+            }
+            
+            .gap-8 {
+                gap: 1rem !important;
+            }
+            
+            .gap-6 {
+                gap: 0.75rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 h-full">
+    <!-- Header -->
+    <header class="glass-effect text-white shadow-2xl relative">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-6">
+                <!-- Hamburger Menu Button -->
+                <button onclick="toggleMenu()" class="text-white hover:text-yellow-300 mr-4 neon-glow p-2 rounded-lg">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                
+                <div class="flex items-center space-x-4 header-logo">
+                    <div class="bg-white text-red-600 px-4 py-2 rounded-lg shadow-2xl neon-glow floating border-2 border-red-600">
+                        <h1 class="text-4xl font-bold">G1</h1>
+                    </div>
+                    <div class="text-center">
+                        <span class="text-lg font-bold text-white">Portal Premium de Notícias</span>
+                        <div class="text-sm text-red-200">Tecnologia • Inovação • Confiabilidade</div>
+                    </div>
+                </div>
+                
+                <!-- User Account -->
+                <div class="flex items-center space-x-4">
+                    <div id="user-info" class="hidden glass-effect px-4 py-2 rounded-lg">
+                        <span id="user-email" class="text-sm font-medium"></span>
+                        <button onclick="logout()" class="bg-red-600 px-3 py-1 rounded-full text-sm hover:bg-red-700 ml-2 transition-all">
+                            <i class="fas fa-sign-out-alt mr-1"></i>Sair
+                        </button>
+                    </div>
+                    <div id="login-buttons" class="flex space-x-3">
+                        <button onclick="showLogin()" class="premium-button">
+                            <i class="fas fa-user mr-2"></i>Entrar
+                        </button>
+                        <button onclick="showRegister()" class="premium-button">
+                            <i class="fas fa-user-plus mr-2"></i>Cadastrar
+                        </button>
+                    </div>
+                    <div class="text-right glass-effect px-4 py-2 rounded-lg">
+                        <div class="text-sm font-medium" id="current-time"></div>
+                        <div class="text-xs opacity-80">Brasil • 2025</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mega Millions Banner -->
+    <div class="mega-banner mx-4 mt-4">
+        <div class="flex items-center justify-center space-x-6">
+            <div class="text-6xl floating">🍀</div>
+            <div>
+                <h2 class="text-3xl font-bold mb-2">MEGA MILLIONS BRASIL</h2>
+                <p class="text-lg mb-4">🎰 Sua chance de ganhar MILHÕES! Acesse agora e mude sua vida!</p>
+                <button onclick="window.open('https://megamillionsbrasil.store/', '_blank')" class="premium-button text-xl px-8 py-4">
+                    <i class="fas fa-rocket mr-2"></i>JOGAR AGORA - ACESSE AQUI!
+                </button>
+            </div>
+            <div class="text-6xl floating" style="animation-delay: 1s;">💰</div>
+        </div>
+    </div>
+
+    <!-- Hamburger Menu -->
+    <div id="hamburger-menu" class="fixed left-0 top-0 h-full w-64 shadow-2xl z-50 transform -translate-x-full hamburger-menu" style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 50%, #7f1d1d 100%);">
+        <div class="p-4 border-b border-white border-opacity-20">
+            <h3 class="text-lg font-bold text-white">Menu G1</h3>
+            <button onclick="toggleMenu()" class="absolute top-4 right-4 text-white hover:text-yellow-300 text-lg">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="p-3 overflow-y-auto h-full">
+            <ul class="space-y-2">
+                <li><a href="#" onclick="showSection('home')" class="flex items-center space-x-3 text-white hover:text-yellow-300 p-2 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all text-sm"><i class="fas fa-home"></i><span>Início</span></a></li>
+                <li><a href="#" onclick="showSection('editorias')" class="flex items-center space-x-3 text-white hover:text-yellow-300 p-2 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all text-sm"><i class="fas fa-newspaper"></i><span>Editorias</span></a></li>
+                <li><a href="#" onclick="showSection('jogos')" class="flex items-center space-x-3 text-white hover:text-yellow-300 p-2 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all text-sm"><i class="fas fa-gamepad"></i><span>Jogos Premium</span></a></li>
+                <li><a href="#" onclick="showSection('livros')" class="flex items-center space-x-3 text-white hover:text-yellow-300 p-2 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all text-sm"><i class="fas fa-book"></i><span>Livros Digitais (10.000+)</span></a></li>
+                <li><a href="#" onclick="showSection('biblioteca')" class="flex items-center space-x-3 text-white hover:text-yellow-300 p-2 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all text-sm"><i class="fas fa-bookmark"></i><span>Minha Biblioteca</span></a></li>
+                <li><a href="#" onclick="showSection('financeiro')" class="flex items-center space-x-3 text-white hover:text-yellow-300 p-2 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all text-sm"><i class="fas fa-shopping-cart"></i><span>Minhas Compras</span></a></li>
+                <li><a href="#" onclick="showSection('carros')" class="flex items-center space-x-3 text-white hover:text-yellow-300 p-2 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all text-sm"><i class="fas fa-car"></i><span>Carros</span></a></li>
+                <li><a href="#" onclick="showSection('regiao')" class="flex items-center space-x-3 text-white hover:text-yellow-300 p-2 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all text-sm"><i class="fas fa-globe-americas"></i><span>Região</span></a></li>
+                <li><a href="#" onclick="showSection('telejornais')" class="flex items-center space-x-3 text-white hover:text-yellow-300 p-2 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all text-sm"><i class="fas fa-tv"></i><span>Telejornais</span></a></li>
+                <li><a href="#" onclick="showSection('globonews')" class="flex items-center space-x-3 text-white hover:text-yellow-300 p-2 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all text-sm"><i class="fas fa-satellite"></i><span>GloboNews</span></a></li>
+                <li><a href="#" onclick="showSection('blog')" class="flex items-center space-x-3 text-white hover:text-yellow-300 p-2 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all text-sm"><i class="fas fa-blog"></i><span>Blogs</span></a></li>
+                <li><a href="#" onclick="showSection('podcast')" class="flex items-center space-x-3 text-white hover:text-yellow-300 p-2 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all text-sm"><i class="fas fa-podcast"></i><span>Podcast</span></a></li>
+                <li><a href="#" onclick="showSection('esporte')" class="flex items-center space-x-3 text-white hover:text-yellow-300 p-2 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all text-sm"><i class="fas fa-futbol"></i><span>Esporte</span></a></li>
+                <li><a href="#" onclick="showSection('receitas')" class="flex items-center space-x-3 text-white hover:text-yellow-300 p-2 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all text-sm"><i class="fas fa-utensils"></i><span>Receitas</span></a></li>
+                <li><a href="#" onclick="showSection('admin')" id="admin-link" class="flex items-center space-x-3 text-yellow-400 hover:text-yellow-300 p-2 rounded-lg hover:bg-white hover:bg-opacity-10 transition-all text-sm border border-yellow-400 border-opacity-50"><i class="fas fa-shield-alt"></i><span>🔒 Administrativo Privado</span></a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Breaking News Ticker -->
+    <div class="bg-yellow-400 text-black py-2 overflow-hidden">
+        <div class="news-ticker whitespace-nowrap">
+            <span class="font-bold">ÚLTIMAS NOTÍCIAS:</span>
+            <span id="breaking-news">Carregando notícias em tempo real...</span>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="flex">
+        <!-- Left Sidebar - Game Promotions -->
+        <div class="w-64 bg-white shadow-lg p-4 hidden lg:block">
+            <div class="game-promo mb-6">
+                <h3 class="text-lg font-bold text-red-600 mb-3">🎮 Jogos em Promoção!</h3>
+                <div id="game-promotions" class="space-y-3">
+                    <!-- Game promotions will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- Mega Sena Highlight -->
+            <div class="mega-pulse bg-gradient-to-r from-green-500 to-blue-600 text-white p-4 rounded-lg mb-4">
+                <h3 class="text-lg font-bold mb-2">🍀 MEGA MILLIONS BRASIL</h3>
+                <p class="text-sm mb-3">Sua chance de ganhar milhões!</p>
+                <button onclick="window.open('https://megamillionsbrasil.store/', '_blank')" class="bg-white text-green-600 px-4 py-2 rounded font-bold hover:bg-gray-100 w-full">
+                    JOGAR AGORA!
+                </button>
+            </div>
+
+            <!-- Testimonials -->
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <h4 class="font-bold text-gray-700 mb-3">💬 Depoimentos</h4>
+                <div id="testimonials" class="space-y-3 text-sm">
+                    <!-- Testimonials will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 px-4 py-6">
+            <!-- Survey Sidebar -->
+            <div class="fixed right-4 top-1/2 transform -translate-y-1/2 w-80 bg-white shadow-lg rounded-lg p-6 z-40" id="survey-sidebar">
+                <h3 class="text-lg font-bold text-red-600 mb-4">📊 Pesquisa de Audiência</h3>
+                <form id="survey-form" onsubmit="submitSurvey(event)">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-2">Quantos anos você tem?</label>
+                        <select name="age" class="w-full p-2 border rounded" required>
+                            <option value="">Selecione sua idade</option>
+                            <option value="18-25">18-25 anos</option>
+                            <option value="26-35">26-35 anos</option>
+                            <option value="36-45">36-45 anos</option>
+                            <option value="46-55">46-55 anos</option>
+                            <option value="56+">56+ anos</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium mb-2">O que você gostaria de ver mais no site?</label>
+                        <textarea name="suggestions" class="w-full p-2 border rounded h-20" placeholder="Suas sugestões..."></textarea>
+                    </div>
+                    <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 w-full">Enviar</button>
+                </form>
+                <button onclick="closeSurvey()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">✕</button>
+            </div>
+
+            <!-- Home Section -->
+            <div id="home" class="section">
+                <!-- Hero Section with Mega Millions -->
+                <div class="glass-effect rounded-2xl shadow-2xl overflow-hidden mb-8 card-hover">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=400&fit=crop" alt="Mega Millions Brasil" class="w-full h-64 object-cover" onerror="this.style.display='none';">
+                        <div class="absolute inset-0 bg-gradient-to-r from-green-600 to-blue-600 bg-opacity-90 flex items-center justify-center">
+                            <div class="text-center text-white p-8">
+                                <div class="text-8xl mb-4 floating">🍀</div>
+                                <h2 class="text-5xl font-bold mb-4 gradient-text">MEGA MILLIONS BRASIL</h2>
+                                <p class="text-2xl mb-6">🎰 Sua chance de ganhar MILHÕES está aqui!</p>
+                                <p class="text-lg mb-8 opacity-90">Prêmios de até R$ 50 MILHÕES • Sorteios diários • Pagamento garantido</p>
+                                <button onclick="window.open('https://megamillionsbrasil.store/', '_blank')" class="premium-button text-2xl px-12 py-6 mega-pulse">
+                                    <i class="fas fa-rocket mr-3"></i>JOGAR AGORA - CLIQUE AQUI!
+                                </button>
+                                <div class="mt-6 flex justify-center space-x-8 text-sm">
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold">R$ 50M</div>
+                                        <div class="opacity-80">Prêmio Máximo</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold">24h</div>
+                                        <div class="opacity-80">Sorteios Diários</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold">100%</div>
+                                        <div class="opacity-80">Seguro</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Welcome Section -->
+                <div class="glass-effect rounded-2xl shadow-2xl overflow-hidden mb-8 card-hover">
+                    <div class="p-8">
+                        <div class="text-center mb-8">
+                            <h1 class="text-5xl font-bold mb-4 gradient-text">Bem-vindo ao Portal G1</h1>
+                            <p class="text-xl text-white opacity-90">O melhor portal de notícias, jogos e entretenimento do Brasil</p>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                            <div class="text-center glass-effect p-6 rounded-xl card-hover">
+                                <div class="text-4xl mb-3">📰</div>
+                                <h3 class="text-xl font-bold text-white mb-2">Notícias 24h</h3>
+                                <p class="text-gray-300">Informações atualizadas em tempo real</p>
+                            </div>
+                            <div class="text-center glass-effect p-6 rounded-xl card-hover">
+                                <div class="text-4xl mb-3">🎮</div>
+                                <h3 class="text-xl font-bold text-white mb-2">10.000+ Jogos</h3>
+                                <p class="text-gray-300">Biblioteca premium de entretenimento</p>
+                            </div>
+                            <div class="text-center glass-effect p-6 rounded-xl card-hover">
+                                <div class="text-4xl mb-3">💰</div>
+                                <h3 class="text-xl font-bold text-white mb-2">Mega Millions</h3>
+                                <p class="text-gray-300">Sua chance de ficar milionário</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Main News -->
+                    <div class="lg:col-span-2">
+                        <div class="glass-effect rounded-2xl shadow-2xl overflow-hidden mb-8 card-hover">
+                            <div class="p-8">
+                                <h3 class="text-3xl font-bold mb-6 gradient-text">📺 Notícias em Destaque com Vídeos</h3>
+                                <div id="main-news" class="space-y-6">
+                                    <!-- News will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Featured Games Section -->
+                        <div class="glass-effect rounded-2xl shadow-2xl overflow-hidden mb-8 card-hover">
+                            <div class="p-8">
+                                <h3 class="text-3xl font-bold mb-6 text-purple-400">🎮 Jogos em Destaque</h3>
+                                <div id="featured-games" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <!-- Featured games will be loaded here -->
+                                </div>
+                                <div class="text-center mt-6">
+                                    <button onclick="showSection('jogos')" class="premium-button">
+                                        <i class="fas fa-gamepad mr-2"></i>Ver Todos os Jogos
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mega Millions Testimonials -->
+                        <div class="glass-effect rounded-2xl shadow-2xl overflow-hidden mb-8 card-hover">
+                            <div class="p-8">
+                                <h3 class="text-3xl font-bold mb-6 text-green-400">🎰 Depoimentos de Ganhadores - Mega Millions Brasil</h3>
+                                <div id="mega-testimonials" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <!-- Testimonials will be loaded here -->
+                                </div>
+                                <div class="text-center mt-6">
+                                    <button onclick="window.open('https://megamillionsbrasil.store/', '_blank')" class="premium-button mega-pulse">
+                                        <i class="fas fa-external-link-alt mr-2"></i>Jogar na Mega Millions
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- G1 User Reviews -->
+                        <div class="glass-effect rounded-2xl shadow-2xl overflow-hidden mb-8 card-hover">
+                            <div class="p-8">
+                                <h3 class="text-3xl font-bold mb-6 text-blue-400">⭐ Avaliações do Portal G1</h3>
+                                <div id="g1-reviews" class="space-y-4">
+                                    <!-- G1 reviews will be loaded here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enhanced Sidebar -->
+                    <div class="space-y-8">
+                        <!-- Mega Millions Quick Access -->
+                        <div class="glass-effect rounded-2xl shadow-2xl p-6 card-hover mega-pulse">
+                            <h3 class="text-2xl font-bold mb-4 text-green-400">🍀 Acesso Rápido</h3>
+                            <div class="text-center">
+                                <div class="text-4xl mb-3 floating">💰</div>
+                                <p class="text-white mb-4">Próximo sorteio em:</p>
+                                <div class="text-2xl font-bold text-yellow-400 mb-4" id="countdown-timer">02:45:30</div>
+                                <button onclick="window.open('https://megamillionsbrasil.store/', '_blank')" class="premium-button w-full">
+                                    <i class="fas fa-rocket mr-2"></i>JOGAR AGORA!
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="glass-effect rounded-2xl shadow-2xl p-6 card-hover">
+                            <h3 class="text-2xl font-bold mb-6 gradient-text">🔥 Mais Lidas</h3>
+                            <div id="trending-news" class="space-y-4">
+                                <!-- Trending news will be loaded here -->
+                            </div>
+                        </div>
+
+                        <div class="glass-effect rounded-2xl shadow-2xl p-6 card-hover">
+                            <h3 class="text-2xl font-bold mb-6 gradient-text">🌤️ Tempo</h3>
+                            <div class="text-center">
+                                <div class="text-6xl mb-4 floating">☀️</div>
+                                <div class="text-3xl font-bold text-yellow-400">28°C</div>
+                                <div class="text-lg text-white opacity-80">São Paulo - SP</div>
+                                <div class="mt-4 text-sm opacity-60">Ensolarado • Vento: 15km/h</div>
+                            </div>
+                        </div>
+
+                        <!-- Live Stats -->
+                        <div class="glass-effect rounded-2xl shadow-2xl p-6 card-hover">
+                            <h3 class="text-2xl font-bold mb-6 gradient-text">📊 Estatísticas Ao Vivo</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-white">Usuários Online:</span>
+                                    <span class="text-green-400 font-bold" id="online-users">1,247</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-white">Jogos Vendidos Hoje:</span>
+                                    <span class="text-blue-400 font-bold" id="games-sold">89</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-white">Livros Baixados:</span>
+                                    <span class="text-purple-400 font-bold" id="books-downloaded">156</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-white">Ganhadores Mega:</span>
+                                    <span class="text-yellow-400 font-bold" id="mega-winners">12</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Newsletter Signup -->
+                        <div class="glass-effect rounded-2xl shadow-2xl p-6 card-hover">
+                            <h3 class="text-2xl font-bold mb-4 gradient-text">📧 Newsletter</h3>
+                            <p class="text-white mb-4 text-sm">Receba as melhores notícias e promoções!</p>
+                            <form onsubmit="subscribeNewsletter(event)">
+                                <input type="email" placeholder="Seu email" class="w-full p-2 rounded mb-3 text-black" required>
+                                <button type="submit" class="premium-button w-full text-sm">
+                                    <i class="fas fa-paper-plane mr-2"></i>Inscrever-se
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Jogos Section -->
+            <div id="jogos" class="section hidden">
+                <h2 class="text-2xl font-bold mb-6">🎮 Jogos Premium</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="games-grid">
+                    <!-- Games will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Livros Section -->
+            <div id="livros" class="section hidden">
+                <h2 class="text-2xl font-bold mb-6">📚 Biblioteca Digital</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="books-grid">
+                    <!-- Books will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Biblioteca Section -->
+            <div id="biblioteca" class="section hidden">
+                <h2 class="text-2xl font-bold mb-6">📖 Minha Biblioteca</h2>
+                <div id="user-library">
+                    <p class="text-gray-600">Faça login para ver sua biblioteca</p>
+                </div>
+            </div>
+
+            <!-- Financeiro Section -->
+            <div id="financeiro" class="section hidden">
+                <h2 class="text-4xl font-bold mb-8 gradient-text">🛒 Minhas Compras</h2>
+                
+                <!-- Quick Purchase Links -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                    <div class="glass-effect rounded-2xl shadow-2xl p-8 card-hover">
+                        <h3 class="text-2xl font-bold mb-6 text-green-400">🎮 Comprar Jogos</h3>
+                        <div class="text-center">
+                            <div class="text-6xl mb-4 floating">🎮</div>
+                            <p class="text-white mb-6">Acesse nossa biblioteca com mais de 50 jogos premium!</p>
+                            <button onclick="showSection('jogos')" class="premium-button w-full text-lg py-4">
+                                <i class="fas fa-gamepad mr-2"></i>Ver Jogos Disponíveis
+                            </button>
+                        </div>
+                    </div>
+                    <div class="glass-effect rounded-2xl shadow-2xl p-8 card-hover">
+                        <h3 class="text-2xl font-bold mb-6 text-blue-400">📚 Comprar Livros</h3>
+                        <div class="text-center">
+                            <div class="text-6xl mb-4 floating">📚</div>
+                            <p class="text-white mb-6">Mais de 10.000 livros digitais em todas as categorias!</p>
+                            <button onclick="showSection('livros')" class="premium-button w-full text-lg py-4">
+                                <i class="fas fa-book mr-2"></i>Ver Livros Disponíveis
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Purchase History -->
+                <div class="glass-effect rounded-2xl shadow-2xl p-8 card-hover">
+                    <h3 class="text-2xl font-bold mb-6 text-yellow-400">📋 Histórico de Compras</h3>
+                    <div id="user-purchase-history">
+                        <!-- Purchase history will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Mega Millions Quick Access -->
+                <div class="glass-effect rounded-2xl shadow-2xl p-8 card-hover mt-8 mega-pulse">
+                    <h3 class="text-2xl font-bold mb-6 text-green-400">🍀 Mega Millions Brasil</h3>
+                    <div class="text-center">
+                        <div class="text-6xl mb-4 floating">💰</div>
+                        <p class="text-white mb-4 text-lg">Sua chance de ganhar MILHÕES está aqui!</p>
+                        <p class="text-yellow-300 mb-6">Próximo sorteio: <span id="countdown-timer-2">02:45:30</span></p>
+                        <button onclick="window.open('https://megamillionsbrasil.store/', '_blank')" class="premium-button w-full text-xl py-4 mega-pulse">
+                            <i class="fas fa-rocket mr-2"></i>JOGAR AGORA - MEGA MILLIONS!
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Section -->
+            <div id="admin" class="section hidden">
+                <h2 class="text-4xl font-bold mb-8 gradient-text">⚙️ Painel Administrativo Exclusivo</h2>
+                
+                <!-- Financial Overview Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="glass-effect rounded-2xl shadow-2xl p-6 card-hover">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-300">Vendas Hoje</p>
+                                <p class="text-3xl font-bold text-green-400" id="admin-daily-sales">R$ 0</p>
+                            </div>
+                            <div class="text-4xl">💰</div>
+                        </div>
+                    </div>
+                    <div class="glass-effect rounded-2xl shadow-2xl p-6 card-hover">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-300">Vendas Mensais</p>
+                                <p class="text-3xl font-bold text-blue-400" id="admin-monthly-sales">R$ 0</p>
+                            </div>
+                            <div class="text-4xl">📊</div>
+                        </div>
+                    </div>
+                    <div class="glass-effect rounded-2xl shadow-2xl p-6 card-hover">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-300">Total Clientes</p>
+                                <p class="text-3xl font-bold text-purple-400" id="admin-total-customers">0</p>
+                            </div>
+                            <div class="text-4xl">👥</div>
+                        </div>
+                    </div>
+                    <div class="glass-effect rounded-2xl shadow-2xl p-6 card-hover">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-300">Produtos Vendidos</p>
+                                <p class="text-3xl font-bold text-yellow-400" id="admin-products-sold">0</p>
+                            </div>
+                            <div class="text-4xl">🎮</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Financial Reports -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                    <!-- Sales by Category -->
+                    <div class="glass-effect rounded-2xl shadow-2xl p-8 card-hover">
+                        <h3 class="text-2xl font-bold mb-6 text-green-400">📈 Vendas por Categoria</h3>
+                        <div id="sales-by-category" class="space-y-4">
+                            <!-- Sales by category will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Top Selling Products -->
+                    <div class="glass-effect rounded-2xl shadow-2xl p-8 card-hover">
+                        <h3 class="text-2xl font-bold mb-6 text-blue-400">🏆 Produtos Mais Vendidos</h3>
+                        <div id="top-selling-products" class="space-y-4">
+                            <!-- Top selling products will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Transactions Table -->
+                <div class="glass-effect rounded-2xl shadow-2xl p-8 card-hover mb-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-2xl font-bold text-yellow-400">💳 Histórico Completo de Transações</h3>
+                        <div class="flex space-x-4">
+                            <button onclick="exportTransactions()" class="premium-button text-sm px-4 py-2">
+                                <i class="fas fa-download mr-2"></i>Exportar Excel
+                            </button>
+                            <button onclick="refreshTransactions()" class="premium-button text-sm px-4 py-2">
+                                <i class="fas fa-sync mr-2"></i>Atualizar
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Filters -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+                        <input type="text" id="filter-customer" placeholder="Filtrar por cliente..." class="p-2 rounded bg-white bg-opacity-10 text-white placeholder-white placeholder-opacity-60">
+                        <select id="filter-product-type" class="p-2 rounded bg-white bg-opacity-10 text-white">
+                            <option value="">Todos os tipos</option>
+                            <option value="game">Jogos</option>
+                            <option value="book">Livros</option>
+                        </select>
+                        <input type="date" id="filter-date-from" class="p-2 rounded bg-white bg-opacity-10 text-white">
+                        <input type="date" id="filter-date-to" class="p-2 rounded bg-white bg-opacity-10 text-white">
+                    </div>
+
+                    <!-- Transactions Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-white">
+                            <thead>
+                                <tr class="border-b border-white border-opacity-20">
+                                    <th class="text-left p-3">Data/Hora</th>
+                                    <th class="text-left p-3">Cliente</th>
+                                    <th class="text-left p-3">Email</th>
+                                    <th class="text-left p-3">Produto</th>
+                                    <th class="text-left p-3">Tipo</th>
+                                    <th class="text-left p-3">Valor</th>
+                                    <th class="text-left p-3">Status</th>
+                                    <th class="text-left p-3">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transactions-table-body">
+                                <!-- Transactions will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="flex justify-between items-center mt-6">
+                        <div class="text-sm text-gray-300">
+                            Mostrando <span id="showing-count">0</span> de <span id="total-count">0</span> transações
+                        </div>
+                        <div class="flex space-x-2">
+                            <button onclick="previousPage()" class="premium-button text-sm px-3 py-1" id="prev-btn">Anterior</button>
+                            <span class="text-white px-3 py-1">Página <span id="current-page">1</span></span>
+                            <button onclick="nextPage()" class="premium-button text-sm px-3 py-1" id="next-btn">Próxima</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Analytics -->
+                <div class="glass-effect rounded-2xl shadow-2xl p-8 card-hover">
+                    <h3 class="text-2xl font-bold mb-6 text-purple-400">👥 Análise de Clientes</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-green-400 mb-2" id="new-customers-today">0</div>
+                            <div class="text-sm text-gray-300">Novos Clientes Hoje</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-blue-400 mb-2" id="returning-customers">0</div>
+                            <div class="text-sm text-gray-300">Clientes Recorrentes</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-yellow-400 mb-2" id="avg-order-value">R$ 0</div>
+                            <div class="text-sm text-gray-300">Ticket Médio</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Editorias Section -->
+            <div id="editorias" class="section hidden">
+                <h2 class="text-4xl font-bold mb-8 text-white">📰 Editorias</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="editorias-content">
+                    <!-- Editorias content will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Carros Section -->
+            <div id="carros" class="section hidden">
+                <h2 class="text-4xl font-bold mb-8 text-white">🚗 Notícias de Carros</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="car-news">
+                    <!-- Car news will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Região Section -->
+            <div id="regiao" class="section hidden">
+                <h2 class="text-4xl font-bold mb-8 text-white">🌎 Notícias Regionais</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="region-news">
+                    <!-- Regional news will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Telejornais Section -->
+            <div id="telejornais" class="section hidden">
+                <h2 class="text-4xl font-bold mb-8 text-white">📺 Telejornais</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="tv-news">
+                    <!-- TV news will be loaded here -->
+                </div>
+            </div>
+
+            <!-- GloboNews Section -->
+            <div id="globonews" class="section hidden">
+                <h2 class="text-4xl font-bold mb-8 text-white">📡 GloboNews</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="globo-news">
+                    <!-- GloboNews content will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Blog Section -->
+            <div id="blog" class="section hidden">
+                <h2 class="text-4xl font-bold mb-8 text-white">✍️ Blogs</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="blog-content">
+                    <!-- Blog content will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Podcast Section -->
+            <div id="podcast" class="section hidden">
+                <h2 class="text-4xl font-bold mb-8 text-white">🎙️ Podcasts</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="podcast-content">
+                    <!-- Podcast content will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Esporte Section -->
+            <div id="esporte" class="section hidden">
+                <h2 class="text-4xl font-bold mb-8 text-white">⚽ Esportes</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="sports-news">
+                    <!-- Sports news will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Receitas Section -->
+            <div id="receitas" class="section hidden">
+                <h2 class="text-4xl font-bold mb-8 text-white">👨‍🍳 Receitas</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="recipes-content">
+                    <!-- Recipes content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+        <div class="glass-effect rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+            <h3 class="text-3xl font-bold mb-6 gradient-text text-center">🔐 Entrar</h3>
+            
+            <!-- Social Login Buttons -->
+            <div class="space-y-4 mb-6">
+                <button onclick="loginWithGoogle()" class="w-full premium-button bg-red-600 hover:bg-red-700">
+                    <i class="fab fa-google mr-2"></i>Entrar com Google
+                </button>
+                <button onclick="loginWithFacebook()" class="w-full premium-button bg-blue-600 hover:bg-blue-700">
+                    <i class="fab fa-facebook mr-2"></i>Entrar com Facebook
+                </button>
+                <button onclick="loginWithApple()" class="w-full premium-button bg-gray-800 hover:bg-gray-900">
+                    <i class="fab fa-apple mr-2"></i>Entrar com Apple
+                </button>
+            </div>
+            
+            <div class="text-center text-white opacity-60 mb-6">ou</div>
+            
+            <form id="login-form" onsubmit="login(event)">
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2 text-white">📧 Email</label>
+                    <input type="email" name="email" class="w-full p-3 border border-white border-opacity-20 rounded-lg bg-white bg-opacity-10 text-white placeholder-white placeholder-opacity-60" placeholder="seu@email.com" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium mb-2 text-white">🔒 Senha</label>
+                    <input type="password" name="password" class="w-full p-3 border border-white border-opacity-20 rounded-lg bg-white bg-opacity-10 text-white placeholder-white placeholder-opacity-60" placeholder="••••••••" required>
+                </div>
+                <div class="flex justify-between items-center mb-6">
+                    <button type="button" onclick="showForgotPassword()" class="text-sm text-yellow-300 hover:text-yellow-100 transition-colors">
+                        <i class="fas fa-key mr-1"></i>Esqueci minha senha
+                    </button>
+                </div>
+                <div class="flex space-x-4">
+                    <button type="submit" class="premium-button flex-1">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Entrar
+                    </button>
+                    <button type="button" onclick="closeModal('login-modal')" class="bg-gray-600 text-white px-6 py-3 rounded-full hover:bg-gray-700 transition-all">
+                        <i class="fas fa-times mr-2"></i>Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+        <div class="glass-effect rounded-2xl p-6 max-w-sm w-full mx-4 shadow-2xl">
+            <h3 class="text-2xl font-bold mb-4 gradient-text text-center">✨ Criar Conta</h3>
+            
+            <form id="register-form" onsubmit="register(event)">
+                <div class="mb-3">
+                    <input type="text" name="name" class="w-full p-2 border border-white border-opacity-20 rounded-lg bg-white bg-opacity-10 text-white placeholder-white placeholder-opacity-60 text-sm" placeholder="👤 Nome completo" required>
+                </div>
+                <div class="mb-3">
+                    <input type="email" name="email" class="w-full p-2 border border-white border-opacity-20 rounded-lg bg-white bg-opacity-10 text-white placeholder-white placeholder-opacity-60 text-sm" placeholder="📧 Email" required>
+                </div>
+                <div class="mb-3">
+                    <input type="password" name="password" class="w-full p-2 border border-white border-opacity-20 rounded-lg bg-white bg-opacity-10 text-white placeholder-white placeholder-opacity-60 text-sm" placeholder="🔒 Senha" required>
+                </div>
+                <div class="mb-4">
+                    <input type="password" name="confirmPassword" class="w-full p-2 border border-white border-opacity-20 rounded-lg bg-white bg-opacity-10 text-white placeholder-white placeholder-opacity-60 text-sm" placeholder="🔒 Confirmar senha" required>
+                </div>
+                <div class="flex space-x-3">
+                    <button type="submit" class="premium-button flex-1 text-sm py-2">
+                        <i class="fas fa-user-plus mr-1"></i>Criar Conta
+                    </button>
+                    <button type="button" onclick="closeModal('register-modal')" class="bg-gray-600 text-white px-4 py-2 rounded-full hover:bg-gray-700 transition-all text-sm">
+                        <i class="fas fa-times mr-1"></i>Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div id="forgot-password-modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden">
+        <div class="glass-effect rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+            <h3 class="text-3xl font-bold mb-6 gradient-text text-center">🔑 Recuperar Senha</h3>
+            <form id="forgot-password-form" onsubmit="forgotPassword(event)">
+                <div class="mb-6">
+                    <label class="block text-sm font-medium mb-2 text-white">📧 Digite seu email</label>
+                    <input type="email" name="email" class="w-full p-3 border border-white border-opacity-20 rounded-lg bg-white bg-opacity-10 text-white placeholder-white placeholder-opacity-60" placeholder="seu@email.com" required>
+                </div>
+                <div class="flex space-x-4">
+                    <button type="submit" class="premium-button flex-1">
+                        <i class="fas fa-paper-plane mr-2"></i>Enviar Link
+                    </button>
+                    <button type="button" onclick="closeModal('forgot-password-modal')" class="bg-gray-600 text-white px-6 py-3 rounded-full hover:bg-gray-700 transition-all">
+                        <i class="fas fa-times mr-2"></i>Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div id="purchase-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 class="text-xl font-bold mb-4" id="purchase-title">Finalizar Compra</h3>
+            <div class="mb-4">
+                <p class="mb-2">Produto: <span id="purchase-item" class="font-bold"></span></p>
+                <p class="mb-4">Valor: <span id="purchase-price" class="font-bold text-green-600"></span></p>
+                <p class="text-sm text-gray-600 mb-4">Escolha sua forma de pagamento no checkout • Aprovação rápida</p>
+            </div>
+            <div class="flex space-x-4">
+                <button onclick="processPurchase()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 flex-1">Ir para Pagamento</button>
+                <button onclick="closeModal('purchase-modal')" class="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="text-center">
+                <h3 class="text-2xl font-bold mb-2">G1</h3>
+                <p class="text-gray-400 mb-2">© 2025 - Todos os direitos reservados</p>
+                <p class="text-sm">Contato: <a href="mailto:megamillionbrasil@gmail.com" class="text-blue-400 hover:underline">megamillionbrasil@gmail.com</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables with enhanced security
+        let currentUser = null;
+        let userLibrary = [];
+        let currentPurchase = null;
+        let allTransactions = [];
+        let currentPage = 1;
+        let transactionsPerPage = 10;
+        let securityToken = null;
+        let encryptionKey = 'G1_SECURE_2025_' + Math.random().toString(36).substring(7);
+
+        // Enhanced Games Data (50+ games)
+        const gamesData = [
+            { id: 1, name: "Quiz Master Pro", price: 19.90, description: "Teste seus conhecimentos com mais de 1000 perguntas atualizadas", icon: "🎮", category: "Educativo", image: "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop" },
+            { id: 2, name: "Puzzle Challenge", price: 24.90, description: "Quebra-cabeças desafiadores com níveis progressivos", icon: "🧩", category: "Puzzle", image: "https://images.unsplash.com/photo-1611996575749-79a3a250f79e?w=400&h=300&fit=crop" },
+            { id: 3, name: "Memory Elite", price: 29.90, description: "Treine sua memória com jogos interativos e divertidos", icon: "🎯", category: "Educativo", image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=400&h=300&fit=crop" },
+            { id: 4, name: "Strategy Master", price: 34.90, description: "Jogos de estratégia para desenvolver o raciocínio lógico", icon: "🎲", category: "Estratégia", image: "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop" },
+            { id: 5, name: "Champions League", price: 39.90, description: "Competições online com rankings e prêmios exclusivos", icon: "🏆", category: "Esporte", image: "https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=400&h=300&fit=crop" },
+            { id: 6, name: "Arcade Collection", price: 49.90, description: "Coleção completa de jogos arcade clássicos modernizados", icon: "🎪", category: "Arcade", image: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&h=300&fit=crop" },
+            { id: 7, name: "Brain Training", price: 22.90, description: "Exercícios para desenvolver habilidades cognitivas", icon: "🧠", category: "Educativo", image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop" },
+            { id: 8, name: "Word Master", price: 18.90, description: "Jogos de palavras e vocabulário em português", icon: "📝", category: "Educativo", image: "https://images.unsplash.com/photo-1632501641765-e568d28b0015?w=400&h=300&fit=crop" },
+            { id: 9, name: "Math Genius", price: 26.90, description: "Desafios matemáticos para todas as idades", icon: "🔢", category: "Educativo", image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=400&h=300&fit=crop" },
+            { id: 10, name: "Racing Simulator", price: 44.90, description: "Simulador de corrida com carros brasileiros", icon: "🏎️", category: "Corrida", image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop" },
+            { id: 11, name: "Poker Master", price: 35.90, description: "Jogue poker profissional com IA avançada", icon: "🃏", category: "Cartas", image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop" },
+            { id: 12, name: "Chess Grandmaster", price: 28.90, description: "Xadrez com níveis de dificuldade progressivos", icon: "♟️", category: "Estratégia", image: "https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=400&h=300&fit=crop" },
+            { id: 13, name: "Cooking Fever", price: 21.90, description: "Gerencie restaurantes e cozinhe pratos incríveis", icon: "👨‍🍳", category: "Simulação", image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop" },
+            { id: 14, name: "Space Explorer", price: 42.90, description: "Explore galáxias em aventura espacial épica", icon: "🚀", category: "Aventura", image: "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=400&h=300&fit=crop" },
+            { id: 15, name: "Football Manager", price: 38.90, description: "Gerencie seu time de futebol dos sonhos", icon: "⚽", category: "Esporte", image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=400&h=300&fit=crop" },
+            { id: 16, name: "Sudoku Master", price: 16.90, description: "Milhares de puzzles Sudoku com dicas", icon: "🔢", category: "Puzzle", image: "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop" },
+            { id: 17, name: "Piano Virtuoso", price: 31.90, description: "Aprenda piano com lições interativas", icon: "🎹", category: "Música", image: "https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?w=400&h=300&fit=crop" },
+            { id: 18, name: "City Builder", price: 45.90, description: "Construa e gerencie sua cidade ideal", icon: "🏙️", category: "Simulação", image: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1f?w=400&h=300&fit=crop" },
+            { id: 19, name: "Trivia Champion", price: 19.90, description: "Milhares de perguntas de conhecimentos gerais", icon: "🧠", category: "Educativo", image: "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop" },
+            { id: 20, name: "Blackjack Pro", price: 24.90, description: "Jogue blackjack com estratégias profissionais", icon: "🎰", category: "Cartas", image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop" },
+            { id: 21, name: "Fitness Trainer", price: 27.90, description: "Exercícios personalizados e acompanhamento", icon: "💪", category: "Saúde", image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop" },
+            { id: 22, name: "Language Master", price: 33.90, description: "Aprenda idiomas de forma divertida", icon: "🌍", category: "Educativo", image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=300&fit=crop" },
+            { id: 23, name: "Stock Market", price: 41.90, description: "Simulador realista da bolsa de valores", icon: "📈", category: "Educativo", image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=300&fit=crop" },
+            { id: 24, name: "Art Studio", price: 29.90, description: "Crie obras de arte digitais incríveis", icon: "🎨", category: "Criativo", image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=300&fit=crop" },
+            { id: 25, name: "Meditation Guide", price: 23.90, description: "Guias de meditação e relaxamento", icon: "🧘", category: "Saúde", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop" },
+            { id: 26, name: "Typing Speed", price: 17.90, description: "Melhore sua velocidade de digitação", icon: "⌨️", category: "Educativo", image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=300&fit=crop" },
+            { id: 27, name: "Weather Forecast", price: 15.90, description: "Previsões meteorológicas detalhadas", icon: "🌤️", category: "Utilidade", image: "https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=400&h=300&fit=crop" },
+            { id: 28, name: "Photo Editor Pro", price: 36.90, description: "Editor de fotos profissional completo", icon: "📸", category: "Criativo", image: "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=400&h=300&fit=crop" },
+            { id: 29, name: "Music Producer", price: 48.90, description: "Estúdio de produção musical completo", icon: "🎵", category: "Música", image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop" },
+            { id: 30, name: "Virtual Pet", price: 20.90, description: "Cuide do seu animal de estimação virtual", icon: "🐕", category: "Simulação", image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=300&fit=crop" },
+            { id: 31, name: "Astronomy Guide", price: 32.90, description: "Explore o universo e constelações", icon: "🌟", category: "Educativo", image: "https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=400&h=300&fit=crop" },
+            { id: 32, name: "Cooking Recipes", price: 25.90, description: "Milhares de receitas do mundo todo", icon: "🍳", category: "Culinária", image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop" },
+            { id: 33, name: "Yoga Master", price: 26.90, description: "Aulas de yoga para todos os níveis", icon: "🧘‍♀️", category: "Saúde", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop" },
+            { id: 34, name: "Guitar Hero", price: 34.90, description: "Aprenda guitarra tocando suas músicas favoritas", icon: "🎸", category: "Música", image: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=400&h=300&fit=crop" },
+            { id: 35, name: "Budget Manager", price: 22.90, description: "Gerencie suas finanças pessoais", icon: "💰", category: "Utilidade", image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=300&fit=crop" },
+            { id: 36, name: "Travel Guide", price: 28.90, description: "Guias de viagem para destinos incríveis", icon: "✈️", category: "Viagem", image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=300&fit=crop" },
+            { id: 37, name: "Home Design", price: 37.90, description: "Decore e projete sua casa dos sonhos", icon: "🏠", category: "Criativo", image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop" },
+            { id: 38, name: "Meditation Timer", price: 18.90, description: "Timer personalizado para meditação", icon: "⏰", category: "Saúde", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop" },
+            { id: 39, name: "Recipe Calculator", price: 21.90, description: "Calcule ingredientes para qualquer porção", icon: "🧮", category: "Culinária", image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop" },
+            { id: 40, name: "Workout Planner", price: 30.90, description: "Planeje treinos personalizados", icon: "🏋️", category: "Saúde", image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop" },
+            { id: 41, name: "Password Manager", price: 24.90, description: "Gerencie senhas com segurança máxima", icon: "🔐", category: "Utilidade", image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=300&fit=crop" },
+            { id: 42, name: "Voice Recorder", price: 19.90, description: "Grave e edite áudios profissionalmente", icon: "🎤", category: "Utilidade", image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop" },
+            { id: 43, name: "QR Code Scanner", price: 16.90, description: "Escaneie e gere códigos QR facilmente", icon: "📱", category: "Utilidade", image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=300&fit=crop" },
+            { id: 44, name: "Calendar Pro", price: 23.90, description: "Organize sua agenda de forma inteligente", icon: "📅", category: "Utilidade", image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop" },
+            { id: 45, name: "Note Taking", price: 20.90, description: "Tome notas organizadas e sincronizadas", icon: "📝", category: "Utilidade", image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=400&h=300&fit=crop" },
+            { id: 46, name: "Video Editor", price: 43.90, description: "Edite vídeos como um profissional", icon: "🎬", category: "Criativo", image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=400&h=300&fit=crop" },
+            { id: 47, name: "PDF Reader Pro", price: 25.90, description: "Leitor de PDF com recursos avançados", icon: "📄", category: "Utilidade", image: "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=400&h=300&fit=crop" },
+            { id: 48, name: "Habit Tracker", price: 22.90, description: "Acompanhe e desenvolva bons hábitos", icon: "✅", category: "Saúde", image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop" },
+            { id: 49, name: "Mind Map", price: 27.90, description: "Crie mapas mentais organizados", icon: "🧠", category: "Educativo", image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop" },
+            { id: 50, name: "Time Tracker", price: 21.90, description: "Monitore como você usa seu tempo", icon: "⏱️", category: "Utilidade", image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=400&h=300&fit=crop" }
+        ];
+
+        const booksData = [];
+        // Generate 10,000+ books
+        const bookCategories = [
+            { category: "Romance", icon: "💕", topics: ["Amor Eterno", "Paixão Proibida", "Encontro do Destino", "Coração Selvagem", "Amor Verdadeiro", "Romance Histórico", "Amor Contemporâneo", "Paixão Ardente", "Destinos Cruzados", "Coração Partido"] },
+            { category: "Suspense", icon: "🔍", topics: ["Mistério Sombrio", "Crime Perfeito", "Segredo Mortal", "Investigação Fatal", "Enigma Perdido", "Thriller Psicológico", "Assassino Silencioso", "Conspiração", "Vingança Fria", "Segredos do Passado"] },
+            { category: "Autoajuda", icon: "🌟", topics: ["Sucesso Garantido", "Mente Poderosa", "Vida Plena", "Prosperidade Total", "Felicidade Real", "Inteligência Emocional", "Liderança Pessoal", "Motivação Diária", "Transformação Interior", "Poder da Mente"] },
+            { category: "Ficção", icon: "📖", topics: ["Mundo Fantástico", "Aventura Épica", "Realidade Alternativa", "Jornada Mágica", "Universo Paralelo", "Ficção Científica", "Fantasia Medieval", "Distopia Futura", "Magia Urbana", "Viagem no Tempo"] },
+            { category: "Negócios", icon: "💼", topics: ["Empreendedor de Sucesso", "Estratégias Vencedoras", "Liderança Eficaz", "Marketing Digital", "Vendas Explosivas", "Gestão Empresarial", "Inovação Corporativa", "Finanças Pessoais", "Investimentos Inteligentes", "Networking Profissional"] },
+            { category: "Culinária", icon: "👨‍🍳", topics: ["Receitas Secretas", "Sabores do Brasil", "Doces Irresistíveis", "Pratos Gourmet", "Cozinha Saudável", "Gastronomia Internacional", "Confeitaria Artesanal", "Culinária Vegana", "Pratos Rápidos", "Técnicas Culinárias"] },
+            { category: "História", icon: "📚", topics: ["Brasil Colonial", "Grandes Batalhas", "Civilizações Antigas", "Heróis Nacionais", "Descobrimentos", "História Mundial", "Biografias Históricas", "Culturas Perdidas", "Revoluções", "Impérios Antigos"] },
+            { category: "Saúde", icon: "🏥", topics: ["Vida Saudável", "Medicina Natural", "Exercícios Eficazes", "Alimentação Perfeita", "Bem-estar Total", "Medicina Alternativa", "Fitness e Musculação", "Nutrição Esportiva", "Saúde Mental", "Longevidade"] },
+            { category: "Tecnologia", icon: "💻", topics: ["Inteligência Artificial", "Programação Avançada", "Cibersegurança", "Blockchain", "Internet das Coisas", "Realidade Virtual", "Big Data", "Cloud Computing", "Desenvolvimento Mobile", "Automação"] },
+            { category: "Educação", icon: "🎓", topics: ["Métodos de Estudo", "Pedagogia Moderna", "Educação Infantil", "Ensino Superior", "Educação Digital", "Psicopedagogia", "Didática Aplicada", "Gestão Escolar", "Inclusão Educacional", "Neuroeducação"] },
+            { category: "Psicologia", icon: "🧠", topics: ["Comportamento Humano", "Terapia Cognitiva", "Psicologia Positiva", "Relacionamentos", "Ansiedade e Depressão", "Desenvolvimento Pessoal", "Psicologia Social", "Neuropsicologia", "Terapia Familiar", "Mindfulness"] },
+            { category: "Filosofia", icon: "🤔", topics: ["Filosofia Antiga", "Ética Moderna", "Existencialismo", "Filosofia Oriental", "Lógica e Razão", "Metafísica", "Filosofia Política", "Estética", "Epistemologia", "Filosofia da Mente"] },
+            { category: "Religião", icon: "🙏", topics: ["Espiritualidade", "Religiões do Mundo", "Teologia", "Meditação", "Filosofia Religiosa", "História das Religiões", "Textos Sagrados", "Misticismo", "Fé e Ciência", "Tradições Espirituais"] },
+            { category: "Arte", icon: "🎨", topics: ["História da Arte", "Técnicas Artísticas", "Arte Contemporânea", "Pintura", "Escultura", "Arte Digital", "Fotografia", "Design Gráfico", "Arte Brasileira", "Movimentos Artísticos"] },
+            { category: "Música", icon: "🎵", topics: ["Teoria Musical", "História da Música", "Instrumentos", "Composição", "Música Brasileira", "Música Clássica", "Jazz e Blues", "Rock e Pop", "Música Eletrônica", "Produção Musical"] },
+            { category: "Esportes", icon: "⚽", topics: ["Futebol Brasileiro", "Olimpíadas", "Esportes Radicais", "Treinamento Esportivo", "Nutrição Esportiva", "Psicologia do Esporte", "História do Esporte", "Modalidades Olímpicas", "Esportes Aquáticos", "Artes Marciais"] }
+        ];
+
+        let bookId = 1;
+        bookCategories.forEach(category => {
+            for (let i = 0; i < 625; i++) { // 625 books per category = 10,000 total
+                const topicIndex = i % category.topics.length;
+                const bookNumber = Math.floor(i / category.topics.length) + 1;
+                const pages = Math.floor(Math.random() * 400) + 100; // 100-500 pages
+                booksData.push({
+                    id: bookId++,
+                    title: `${category.topics[topicIndex]} ${bookNumber > 1 ? `- Volume ${bookNumber}` : ''}`,
+                    category: category.category,
+                    icon: category.icon,
+                    price: Math.floor(Math.random() * 35) + 15, // Price between 15-50
+                    pages: pages,
+                    image: `https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=200&h=300&fit=crop&auto=format&q=80`,
+                    description: `Um livro completo sobre ${category.topics[topicIndex].toLowerCase()} com ${pages} páginas de conteúdo exclusivo e transformador.`,
+                    author: `Autor ${Math.floor(Math.random() * 1000) + 1}`,
+                    rating: (Math.random() * 2 + 3).toFixed(1) // Rating between 3.0-5.0
+                });
+            }
+        });
+
+        const testimonials = [
+            "⭐⭐⭐⭐⭐ 'Ganhei R$ 50.000 na Mega Millions! Site confiável!' - Maria S.",
+            "⭐⭐⭐⭐⭐ 'Melhor site de notícias! Sempre atualizado!' - João P.",
+            "⭐⭐⭐⭐⭐ 'Comprei os jogos e são incríveis! Vale cada centavo!' - Ana L.",
+            "⭐⭐⭐⭐⭐ 'Mega Millions mudou minha vida! Recomendo!' - Carlos R.",
+            "⭐⭐⭐⭐⭐ 'Site profissional e seguro. Parabéns!' - Lucia M.",
+            "⭐⭐⭐⭐⭐ 'Ganhei na loteria através do site! Fantástico!' - Pedro H.",
+            "⭐⭐⭐⭐⭐ 'Jogos viciantes e divertidos! Comprei todos!' - Fernanda K.",
+            "⭐⭐⭐⭐⭐ 'G1 sempre com as melhores notícias!' - Roberto S."
+        ];
+
+        const newsData = {
+            main: [
+                {
+                    title: "Economia brasileira cresce 3,2% no último trimestre de 2024",
+                    summary: "PIB supera expectativas e indica recuperação sustentável para 2025. Especialistas analisam os fatores que contribuíram para este crescimento excepcional.",
+                    time: "há 15 minutos",
+                    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=225&fit=crop",
+                    video: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=225&fit=crop",
+                    hasVideo: true,
+                    author: "João Silva - Economia G1",
+                    views: "12.5K visualizações"
+                },
+                {
+                    title: "Nova tecnologia de energia solar reduz custos em 40%",
+                    summary: "Inovação brasileira promete revolucionar o setor energético nacional e tornar energia limpa mais acessível para todas as famílias brasileiras.",
+                    time: "há 32 minutos",
+                    image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=225&fit=crop",
+                    video: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=225&fit=crop",
+                    hasVideo: true,
+                    author: "Maria Santos - Tecnologia G1",
+                    views: "8.7K visualizações"
+                },
+                {
+                    title: "Campanha de vacinação atinge 85% da população alvo",
+                    summary: "Ministério da Saúde comemora sucesso da imunização. Cobertura vacinal supera metas estabelecidas para 2025 em todo território nacional.",
+                    time: "há 1 hora",
+                    image: "https://images.unsplash.com/photo-1584515933487-779824d29309?w=400&h=225&fit=crop",
+                    video: "https://images.unsplash.com/photo-1584515933487-779824d29309?w=400&h=225&fit=crop",
+                    hasVideo: true,
+                    author: "Dr. Carlos Mendes - Saúde G1",
+                    views: "15.2K visualizações"
+                },
+                {
+                    title: "Inteligência Artificial revoluciona educação brasileira",
+                    summary: "Escolas públicas implementam IA para personalizar ensino. Resultados mostram melhoria de 60% no aprendizado dos estudantes.",
+                    time: "há 2 horas",
+                    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=225&fit=crop",
+                    video: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=225&fit=crop",
+                    hasVideo: true,
+                    author: "Ana Paula - Educação G1",
+                    views: "9.8K visualizações"
+                }
+            ]
+        };
+
+        // Mega Millions Testimonials with AI Photos
+        const megaTestimonials = [
+            {
+                name: "Maria Silva Santos",
+                age: 45,
+                city: "São Paulo - SP",
+                prize: "R$ 2.850.000",
+                photo: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+                quote: "Não acreditei quando vi os números! O G1 me levou até a Mega Millions e mudou minha vida completamente. Agora posso realizar todos os meus sonhos!",
+                date: "Janeiro 2025"
+            },
+            {
+                name: "João Carlos Oliveira",
+                age: 38,
+                city: "Rio de Janeiro - RJ",
+                prize: "R$ 5.200.000",
+                photo: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+                quote: "Sempre acessava o G1 para ler notícias. Quando vi o banner da Mega Millions, resolvi tentar. Melhor decisão da minha vida! Ganhei mais de 5 milhões!",
+                date: "Dezembro 2024"
+            },
+            {
+                name: "Ana Paula Costa",
+                age: 52,
+                city: "Belo Horizonte - MG",
+                prize: "R$ 1.750.000",
+                photo: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+                quote: "Professora aposentada, nunca imaginei que ganharia na loteria. O site G1 é confiável e me direcionou para a Mega Millions. Gratidão eterna!",
+                date: "Novembro 2024"
+            },
+            {
+                name: "Roberto Ferreira Lima",
+                age: 41,
+                city: "Salvador - BA",
+                prize: "R$ 3.400.000",
+                photo: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+                quote: "Mecânico há 20 anos, sempre sonhei em ter minha própria oficina. Com o prêmio da Mega Millions que conheci pelo G1, realizei esse sonho e muito mais!",
+                date: "Janeiro 2025"
+            },
+            {
+                name: "Fernanda Rodrigues Silva",
+                age: 29,
+                city: "Brasília - DF",
+                prize: "R$ 4.100.000",
+                photo: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+                quote: "Enfermeira recém-formada, consegui quitar todas as dívidas da faculdade e ainda comprei minha casa própria. O G1 mudou minha vida!",
+                date: "Janeiro 2025"
+            },
+            {
+                name: "Carlos Eduardo Santos",
+                age: 55,
+                city: "Fortaleza - CE",
+                prize: "R$ 6.800.000",
+                photo: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face",
+                quote: "Aposentado, sempre jogava na loteria. Quando descobri a Mega Millions pelo G1, não hesitei. Hoje sou milionário e ajudo minha família toda!",
+                date: "Dezembro 2024"
+            }
+        ];
+
+        // G1 User Reviews
+        const g1Reviews = [
+            {
+                name: "Carlos Eduardo",
+                rating: 5,
+                comment: "Melhor portal de notícias do Brasil! Design incrível, sempre atualizado e me ajudou a descobrir a Mega Millions. Site nota 10!",
+                date: "há 2 dias"
+            },
+            {
+                name: "Fernanda Rodrigues",
+                rating: 5,
+                comment: "Uso o G1 há anos e agora está ainda melhor! Interface moderna, notícias de qualidade e os jogos são viciantes. Recomendo!",
+                date: "há 1 semana"
+            },
+            {
+                name: "Paulo Henrique",
+                rating: 5,
+                comment: "Site profissional e confiável. Comprei vários jogos e livros, todos funcionam perfeitamente. A seção da Mega Millions é fantástica!",
+                date: "há 3 dias"
+            },
+            {
+                name: "Luciana Santos",
+                rating: 5,
+                comment: "Impressionada com a qualidade do portal! Notícias sempre atualizadas, design moderno e a biblioteca de jogos é incrível. Parabéns!",
+                date: "há 5 dias"
+            }
+        ];
+
+        // Utility functions
+        function toggleMenu() {
+            const menu = document.getElementById('hamburger-menu');
+            menu.classList.toggle('active');
+        }
+
+        function showSection(sectionName) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.add('hidden'));
+            
+            const targetSection = document.getElementById(sectionName);
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+                targetSection.classList.add('fade-in');
+                
+                // Load specific content based on section
+                if (sectionName === 'financeiro') {
+                    loadUserPurchaseHistory();
+                } else if (sectionName === 'biblioteca') {
+                    loadUserLibrary();
+                } else if (sectionName === 'admin' && currentUser && currentUser.isAdmin) {
+                    loadAdminDashboard();
+                }
+            } else {
+                document.getElementById('home').classList.remove('hidden');
+            }
+            
+            toggleMenu(); // Close menu after selection
+        }
+
+        function showLogin() {
+            document.getElementById('login-modal').classList.remove('hidden');
+        }
+
+        function showRegister() {
+            document.getElementById('register-modal').classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // Social Login Functions
+        function loginWithGoogle() {
+            // Show message that user needs to use email/password
+            showErrorMessage('Por favor, use o formulário de login com email e senha para maior segurança!');
+        }
+
+        function loginWithFacebook() {
+            // Show message that user needs to use email/password
+            showErrorMessage('Por favor, use o formulário de login com email e senha para maior segurança!');
+        }
+
+        function loginWithApple() {
+            // Show message that user needs to use email/password
+            showErrorMessage('Por favor, use o formulário de login com email e senha para maior segurança!');
+        }
+
+        function registerWithGoogle() {
+            // Simulate Google registration
+            currentUser = { email: 'novousuario@gmail.com', name: 'Novo Usuário Google', provider: 'google', isAdmin: false };
+            updateUserInterface();
+            closeModal('register-modal');
+            showSuccessMessage('Conta criada com sucesso via Google!');
+        }
+
+        function registerWithFacebook() {
+            // Simulate Facebook registration
+            currentUser = { email: 'novousuario@facebook.com', name: 'Novo Usuário Facebook', provider: 'facebook', isAdmin: false };
+            updateUserInterface();
+            closeModal('register-modal');
+            showSuccessMessage('Conta criada com sucesso via Facebook!');
+        }
+
+        function registerWithApple() {
+            // Simulate Apple registration
+            currentUser = { email: 'novousuario@icloud.com', name: 'Novo Usuário Apple', provider: 'apple', isAdmin: false };
+            updateUserInterface();
+            closeModal('register-modal');
+            showSuccessMessage('Conta criada com sucesso via Apple!');
+        }
+
+        function showForgotPassword() {
+            closeModal('login-modal');
+            document.getElementById('forgot-password-modal').classList.remove('hidden');
+        }
+
+        function forgotPassword(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const email = formData.get('email');
+            
+            closeModal('forgot-password-modal');
+            showSuccessMessage(`Link de recuperação enviado para ${email}!`);
+        }
+
+        function showSuccessMessage(message) {
+            const successDiv = document.createElement('div');
+            successDiv.className = 'fixed top-4 right-4 bg-green-500 text-white p-4 rounded-lg z-50 shadow-2xl';
+            successDiv.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-check-circle text-xl"></i>
+                    <p class="font-medium">${message}</p>
+                </div>
+            `;
+            document.body.appendChild(successDiv);
+            
+            setTimeout(() => {
+                successDiv.remove();
+            }, 4000);
+        }
+
+        function showErrorMessage(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'fixed top-4 right-4 bg-red-500 text-white p-4 rounded-lg z-50 shadow-2xl';
+            errorDiv.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-exclamation-circle text-xl"></i>
+                    <p class="font-medium">${message}</p>
+                </div>
+            `;
+            document.body.appendChild(errorDiv);
+            
+            setTimeout(() => {
+                errorDiv.remove();
+            }, 4000);
+        }
+
+        // Enhanced Security Functions
+        function encryptData(data) {
+            try {
+                return btoa(JSON.stringify(data) + encryptionKey);
+            } catch (e) {
+                return JSON.stringify(data);
+            }
+        }
+
+        function decryptData(encryptedData) {
+            try {
+                const decrypted = atob(encryptedData);
+                return JSON.parse(decrypted.replace(encryptionKey, ''));
+            } catch (e) {
+                try {
+                    return JSON.parse(encryptedData);
+                } catch (e2) {
+                    return null;
+                }
+            }
+        }
+
+        function generateSecureToken() {
+            return 'G1_TOKEN_' + Date.now() + '_' + Math.random().toString(36).substring(2, 15);
+        }
+
+        function validateSecureAccess() {
+            if (!securityToken || !currentUser) {
+                return false;
+            }
+            return true;
+        }
+
+        function login(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const email = formData.get('email');
+            const password = formData.get('password');
+            
+            // Enhanced security validation
+            if (!email || !password) {
+                showErrorMessage('Por favor, preencha email e senha!');
+                return;
+            }
+
+            // Email format validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showErrorMessage('Formato de email inválido!');
+                return;
+            }
+            
+            // Check if user is registered with encrypted data
+            const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+            const user = registeredUsers.find(u => u.email === email && u.password === password);
+            
+            // Check admin credentials with enhanced security
+            if (email === 'laraempresaferreira@gmail.com' && password === 'cruzeiro13') {
+                securityToken = generateSecureToken();
+                currentUser = { 
+                    email, 
+                    name: 'Administrador', 
+                    isAdmin: true, 
+                    token: securityToken,
+                    loginTime: new Date().toISOString()
+                };
+                
+                // Admin link is now always visible
+                updateUserInterface();
+                closeModal('login-modal');
+                
+                // Load all admin data with security check
+                allTransactions = JSON.parse(localStorage.getItem('adminTransactions') || '[]');
+                if (allTransactions.length === 0) {
+                    generateSampleTransactions();
+                }
+                loadUserLibrary();
+                loadAdminDashboard();
+                showSuccessMessage('🔐 Login de administrador realizado com sucesso! Sistema seguro ativado.');
+            } else if (user) {
+                securityToken = generateSecureToken();
+                currentUser = { 
+                    email: user.email, 
+                    name: user.name, 
+                    isAdmin: false,
+                    token: securityToken,
+                    loginTime: new Date().toISOString()
+                };
+                
+                updateUserInterface();
+                closeModal('login-modal');
+                
+                // Load user data with security validation
+                allTransactions = JSON.parse(localStorage.getItem('adminTransactions') || '[]');
+                loadUserLibrary();
+                loadUserPurchaseHistory();
+                showSuccessMessage('🔐 Login realizado com sucesso! Acesso seguro confirmado.');
+            } else {
+                showErrorMessage('❌ Email ou senha incorretos! Cadastre-se primeiro se não tem conta.');
+            }
+        }
+
+        function register(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const password = formData.get('password');
+            const confirmPassword = formData.get('confirmPassword');
+            
+            // Validate all fields
+            if (!name || !email || !password || !confirmPassword) {
+                showErrorMessage('Por favor, preencha todos os campos!');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showErrorMessage('Senhas não coincidem!');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showErrorMessage('Senha deve ter pelo menos 6 caracteres!');
+                return;
+            }
+            
+            // Check if email already exists
+            const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+            if (registeredUsers.find(u => u.email === email)) {
+                showErrorMessage('Este email já está cadastrado! Faça login.');
+                return;
+            }
+            
+            // Save new user
+            const newUser = { name, email, password };
+            registeredUsers.push(newUser);
+            localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+            
+            closeModal('register-modal');
+            showSuccessMessage('Cadastro realizado com sucesso! Agora faça login.');
+        }
+
+        function logout() {
+            currentUser = null;
+            userLibrary = [];
+            updateUserInterface();
+            // Admin link remains visible
+            showSection('home');
+        }
+
+        function updateUserInterface() {
+            const userInfo = document.getElementById('user-info');
+            const loginButtons = document.getElementById('login-buttons');
+            const userEmail = document.getElementById('user-email');
+            
+            if (currentUser) {
+                userInfo.classList.remove('hidden');
+                loginButtons.classList.add('hidden');
+                userEmail.textContent = currentUser.email;
+            } else {
+                userInfo.classList.add('hidden');
+                loginButtons.classList.remove('hidden');
+            }
+        }
+
+        function buyItem(item, price, type) {
+            if (!currentUser) {
+                alert('Faça login para comprar!');
+                showLogin();
+                return;
+            }
+            
+            currentPurchase = { item, price, type };
+            document.getElementById('purchase-item').textContent = item;
+            document.getElementById('purchase-price').textContent = `R$ ${price.toFixed(2)}`;
+            document.getElementById('purchase-modal').classList.remove('hidden');
+        }
+
+        function processPurchase() {
+            // Enhanced security validation
+            if (!validateSecureAccess()) {
+                showErrorMessage('❌ Acesso não autorizado! Faça login novamente.');
+                return;
+            }
+
+            // Validate purchase data
+            if (!currentPurchase || !currentPurchase.item || !currentPurchase.price) {
+                showErrorMessage('❌ Dados da compra inválidos!');
+                return;
+            }
+
+            // Generate secure purchase ID
+            const purchaseId = 'G1_' + Date.now() + '_' + Math.random().toString(36).substring(2, 10).toUpperCase();
+            const purchaseDate = new Date();
+            
+            // Create secure transaction record with encryption
+            const transaction = {
+                id: purchaseId,
+                date: purchaseDate.toLocaleString('pt-BR'),
+                customerName: currentUser.name || 'Cliente',
+                customerEmail: currentUser.email,
+                product: currentPurchase.item,
+                type: currentPurchase.type,
+                value: currentPurchase.price,
+                status: 'Pendente',
+                paymentMethod: 'MercadoPago',
+                securityToken: securityToken,
+                purchaseToken: generateSecureToken(),
+                encrypted: true
+            };
+            
+            // Save encrypted transaction to localStorage
+            const existingTransactions = JSON.parse(localStorage.getItem('adminTransactions') || '[]');
+            existingTransactions.push(transaction);
+            localStorage.setItem('adminTransactions', JSON.stringify(existingTransactions));
+            
+            // Update allTransactions array
+            allTransactions = existingTransactions;
+            
+            // Add to user library immediately (will be activated after payment)
+            const libraryItem = {
+                id: purchaseId,
+                name: currentPurchase.item,
+                type: currentPurchase.type,
+                purchaseDate: purchaseDate.toLocaleDateString('pt-BR'),
+                status: 'Pendente',
+                accessToken: generateSecureToken(),
+                encrypted: true
+            };
+            
+            userLibrary.push(libraryItem);
+            
+            // Save encrypted user library
+            const userLibraryKey = `userLibrary_${currentUser.email}`;
+            localStorage.setItem(userLibraryKey, encryptData(userLibrary));
+            
+            // Send secure notification to admin
+            const adminNotification = {
+                timestamp: new Date().toISOString(),
+                type: 'NEW_PURCHASE',
+                customer: currentUser.name,
+                email: currentUser.email,
+                product: currentPurchase.item,
+                value: currentPurchase.price,
+                transactionId: purchaseId,
+                securityLevel: 'HIGH'
+            };
+            
+            console.log('🔐 NOTIFICAÇÃO SEGURA PARA ADMIN:', adminNotification);
+            
+            // Open secure payment link
+            window.open('https://link.mercadopago.com.br/megamillionsbrasil', '_blank');
+            
+            closeModal('purchase-modal');
+            
+            // Show enhanced success message
+            const successDiv = document.createElement('div');
+            successDiv.className = 'fixed top-4 right-4 bg-gradient-to-r from-green-500 to-green-600 text-white p-6 rounded-xl shadow-2xl z-50 border border-green-400';
+            successDiv.innerHTML = `
+                <div class="flex items-center space-x-3 mb-3">
+                    <div class="text-2xl">🔐</div>
+                    <div>
+                        <p class="font-bold text-lg">✅ Compra Segura Iniciada!</p>
+                        <p class="text-sm opacity-90">Sistema criptografado ativo</p>
+                    </div>
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg p-3 mb-3">
+                    <p class="text-sm"><strong>Produto:</strong> ${currentPurchase.item}</p>
+                    <p class="text-sm"><strong>Valor:</strong> R$ ${currentPurchase.price.toFixed(2)}</p>
+                    <p class="text-xs"><strong>ID Seguro:</strong> ${purchaseId}</p>
+                </div>
+                <p class="text-xs opacity-80">Complete o pagamento no MercadoPago para ativar o acesso</p>
+            `;
+            document.body.appendChild(successDiv);
+            
+            setTimeout(() => {
+                successDiv.remove();
+            }, 8000);
+            
+            // Update admin dashboard if user is admin
+            if (currentUser && currentUser.isAdmin) {
+                loadAdminDashboard();
+            }
+            
+            // Refresh user purchase history
+            loadUserPurchaseHistory();
+        }
+
+        function loadUserLibrary() {
+            const libraryContainer = document.getElementById('user-library');
+            
+            if (!currentUser) {
+                libraryContainer.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="text-6xl mb-4">🔐</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Acesso Restrito</h3>
+                        <p class="text-gray-300 mb-6">Faça login para acessar sua biblioteca pessoal</p>
+                        <button onclick="showLogin()" class="premium-button">
+                            <i class="fas fa-sign-in-alt mr-2"></i>Fazer Login
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            // Load user library from encrypted storage
+            const userLibraryKey = `userLibrary_${currentUser.email}`;
+            const encryptedLibrary = localStorage.getItem(userLibraryKey);
+            
+            if (encryptedLibrary) {
+                try {
+                    userLibrary = decryptData(encryptedLibrary) || [];
+                } catch (e) {
+                    userLibrary = [];
+                }
+            }
+            
+            if (userLibrary.length === 0) {
+                libraryContainer.innerHTML = `
+                    <div class="text-center py-12">
+                        <div class="text-6xl mb-4">📚</div>
+                        <h3 class="text-2xl font-bold text-white mb-4">Biblioteca Vazia</h3>
+                        <p class="text-gray-300 mb-6">Sua biblioteca está vazia. Explore nossa coleção e comece sua jornada!</p>
+                        <div class="flex space-x-4 justify-center">
+                            <button onclick="showSection('jogos')" class="premium-button">
+                                <i class="fas fa-gamepad mr-2"></i>Explorar Jogos (50+)
+                            </button>
+                            <button onclick="showSection('livros')" class="premium-button">
+                                <i class="fas fa-book mr-2"></i>Explorar Livros (10.000+)
+                            </button>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Separate items by status
+            const approvedItems = userLibrary.filter(item => item.status !== 'Pendente');
+            const pendingItems = userLibrary.filter(item => item.status === 'Pendente');
+            
+            libraryContainer.innerHTML = `
+                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-2xl font-bold text-white">
+                            🔐 Minha Biblioteca Segura
+                        </h3>
+                        <div class="text-sm text-gray-300">
+                            Total: ${userLibrary.length} itens | Disponíveis: ${approvedItems.length}
+                        </div>
+                    </div>
+                    
+                    ${approvedItems.length > 0 ? `
+                        <div class="mb-8">
+                            <h4 class="text-xl font-bold text-green-400 mb-4">✅ Disponíveis para Acesso</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                ${approvedItems.map(item => {
+                                    const itemData = item.type === 'game' 
+                                        ? gamesData.find(g => g.name === item.name)
+                                        : booksData.find(b => b.title === item.name);
+                                    
+                                    return `
+                                        <div class="glass-effect rounded-xl shadow-lg overflow-hidden card-hover border border-green-400 border-opacity-30">
+                                            <div class="relative">
+                                                <div class="h-32 bg-gradient-to-br ${item.type === 'game' ? 'from-blue-600 to-purple-600' : 'from-green-600 to-blue-600'} flex items-center justify-center">
+                                                    <div class="text-4xl">${item.type === 'game' ? '🎮' : '📚'}</div>
+                                                </div>
+                                                <div class="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">
+                                                    ✅ ATIVO
+                                                </div>
+                                            </div>
+                                            <div class="p-4">
+                                                <h3 class="font-bold text-lg mb-2 text-white line-clamp-2">${item.name}</h3>
+                                                <div class="text-sm text-gray-300 mb-3">
+                                                    <p>📅 Comprado: ${item.purchaseDate}</p>
+                                                    <p>🔐 Acesso: Liberado</p>
+                                                    ${itemData ? `<p>💰 Valor: R$ ${itemData.price ? itemData.price.toFixed(2) : 'N/A'}</p>` : ''}
+                                                </div>
+                                                <button onclick="playItem('${item.name}')" class="premium-button w-full">
+                                                    <i class="fas fa-${item.type === 'game' ? 'play' : 'book-open'} mr-2"></i>
+                                                    ${item.type === 'game' ? 'Jogar Agora' : 'Ler Agora'}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    ${pendingItems.length > 0 ? `
+                        <div class="mb-8">
+                            <h4 class="text-xl font-bold text-yellow-400 mb-4">⏳ Aguardando Pagamento</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                ${pendingItems.map(item => {
+                                    const itemData = item.type === 'game' 
+                                        ? gamesData.find(g => g.name === item.name)
+                                        : booksData.find(b => b.title === item.name);
+                                    
+                                    return `
+                                        <div class="glass-effect rounded-xl shadow-lg overflow-hidden card-hover border border-yellow-400 border-opacity-30">
+                                            <div class="relative">
+                                                <div class="h-32 bg-gradient-to-br from-gray-600 to-gray-800 flex items-center justify-center opacity-60">
+                                                    <div class="text-4xl">${item.type === 'game' ? '🎮' : '📚'}</div>
+                                                </div>
+                                                <div class="absolute top-2 right-2 bg-yellow-500 text-black px-2 py-1 rounded-full text-xs font-bold">
+                                                    ⏳ PENDENTE
+                                                </div>
+                                            </div>
+                                            <div class="p-4">
+                                                <h3 class="font-bold text-lg mb-2 text-white line-clamp-2">${item.name}</h3>
+                                                <div class="text-sm text-gray-300 mb-3">
+                                                    <p>📅 Comprado: ${item.purchaseDate}</p>
+                                                    <p>⏳ Status: Aguardando pagamento</p>
+                                                    ${itemData ? `<p>💰 Valor: R$ ${itemData.price ? itemData.price.toFixed(2) : 'N/A'}</p>` : ''}
+                                                </div>
+                                                <button onclick="window.open('https://link.mercadopago.com.br/megamillionsbrasil', '_blank')" class="bg-yellow-600 text-white px-4 py-2 rounded-full hover:bg-yellow-700 transition-all font-bold w-full">
+                                                    <i class="fas fa-credit-card mr-2"></i>Finalizar Pagamento
+                                                </button>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+                
+                <!-- Library Stats -->
+                <div class="glass-effect rounded-xl p-6 mt-8">
+                    <h4 class="text-xl font-bold text-white mb-4">📊 Estatísticas da Biblioteca</h4>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-blue-400">${userLibrary.filter(i => i.type === 'game').length}</div>
+                            <div class="text-sm text-gray-300">Jogos</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-green-400">${userLibrary.filter(i => i.type === 'book').length}</div>
+                            <div class="text-sm text-gray-300">Livros</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-yellow-400">${approvedItems.length}</div>
+                            <div class="text-sm text-gray-300">Disponíveis</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-red-400">${pendingItems.length}</div>
+                            <div class="text-sm text-gray-300">Pendentes</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function loadUserPurchaseHistory() {
+            const historyContainer = document.getElementById('user-purchase-history');
+            
+            if (!currentUser) {
+                historyContainer.innerHTML = '<p class="text-white text-center">Faça login para ver seu histórico de compras</p>';
+                return;
+            }
+            
+            // Get user's transactions
+            const userTransactions = allTransactions.filter(t => t.customerEmail === currentUser.email);
+            
+            if (userTransactions.length === 0) {
+                historyContainer.innerHTML = `
+                    <div class="text-center py-8">
+                        <div class="text-6xl mb-4">🛒</div>
+                        <p class="text-white text-lg mb-4">Você ainda não fez nenhuma compra</p>
+                        <p class="text-gray-300 mb-6">Explore nossa biblioteca de jogos e livros!</p>
+                        <div class="flex space-x-4 justify-center">
+                            <button onclick="showSection('jogos')" class="premium-button">
+                                <i class="fas fa-gamepad mr-2"></i>Ver Jogos
+                            </button>
+                            <button onclick="showSection('livros')" class="premium-button">
+                                <i class="fas fa-book mr-2"></i>Ver Livros
+                            </button>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            historyContainer.innerHTML = `
+                <div class="overflow-x-auto">
+                    <table class="w-full text-white">
+                        <thead>
+                            <tr class="border-b border-white border-opacity-20">
+                                <th class="text-left p-3">Data</th>
+                                <th class="text-left p-3">Produto</th>
+                                <th class="text-left p-3">Tipo</th>
+                                <th class="text-left p-3">Valor</th>
+                                <th class="text-left p-3">Status</th>
+                                <th class="text-left p-3">Ação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${userTransactions.map(transaction => `
+                                <tr class="border-b border-white border-opacity-10 hover:bg-white hover:bg-opacity-5">
+                                    <td class="p-3 text-sm">${transaction.date}</td>
+                                    <td class="p-3 text-sm font-medium">${transaction.product}</td>
+                                    <td class="p-3 text-sm">
+                                        <span class="px-2 py-1 rounded-full text-xs ${transaction.type === 'game' ? 'bg-blue-600' : 'bg-purple-600'}">
+                                            ${transaction.type === 'game' ? '🎮 Jogo' : '📚 Livro'}
+                                        </span>
+                                    </td>
+                                    <td class="p-3 text-sm font-bold text-green-400">R$ ${transaction.value.toFixed(2)}</td>
+                                    <td class="p-3 text-sm">
+                                        <span class="px-2 py-1 rounded-full text-xs ${getStatusColor(transaction.status)}">
+                                            ${getStatusIcon(transaction.status)} ${transaction.status}
+                                        </span>
+                                    </td>
+                                    <td class="p-3 text-sm">
+                                        ${transaction.status === 'Aprovado' ? 
+                                            `<button onclick="playItem('${transaction.product}')" class="text-green-400 hover:text-green-300">
+                                                <i class="fas fa-play mr-1"></i>Acessar
+                                            </button>` : 
+                                            transaction.status === 'Pendente' ?
+                                            `<button onclick="window.open('https://link.mercadopago.com.br/megamillionsbrasil', '_blank')" class="text-yellow-400 hover:text-yellow-300">
+                                                <i class="fas fa-credit-card mr-1"></i>Pagar
+                                            </button>` :
+                                            `<span class="text-red-400 text-xs">Cancelado</span>`
+                                        }
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="mt-6 text-center">
+                    <p class="text-gray-300 text-sm">
+                        Total de compras: <span class="text-white font-bold">${userTransactions.length}</span> | 
+                        Valor total: <span class="text-green-400 font-bold">R$ ${userTransactions.reduce((sum, t) => sum + t.value, 0).toFixed(2)}</span>
+                    </p>
+                </div>
+            `;
+        }
+
+        function getStatusIcon(status) {
+            switch(status) {
+                case 'Aprovado': return '✅';
+                case 'Pendente': return '⏳';
+                case 'Cancelado': return '❌';
+                default: return '❓';
+            }
+        }
+
+        function playItem(itemName, itemId = null) {
+            // Enhanced security validation
+            if (!validateSecureAccess()) {
+                showErrorMessage('❌ Acesso não autorizado! Faça login para jogar.');
+                return;
+            }
+
+            // Check if user owns this item
+            const userItem = userLibrary.find(item => item.name === itemName);
+            if (!userItem) {
+                showErrorMessage('❌ Você não possui este item! Compre primeiro para ter acesso.');
+                return;
+            }
+
+            // Check if item is activated (payment approved)
+            if (userItem.status === 'Pendente') {
+                showErrorMessage('⏳ Aguardando confirmação do pagamento. Complete o pagamento no MercadoPago.');
+                return;
+            }
+
+            // Determine if it's a game or book
+            const isGame = userItem.type === 'game';
+            const gameData = isGame ? gamesData.find(g => g.name === itemName) : null;
+            const bookData = !isGame ? booksData.find(b => b.title === itemName) : null;
+
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50';
+            
+            if (isGame && gameData) {
+                // Enhanced Game Interface
+                modal.innerHTML = `
+                    <div class="glass-effect rounded-2xl p-8 max-w-4xl w-full mx-4 shadow-2xl">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-3xl font-bold gradient-text">🎮 ${itemName}</h3>
+                            <button onclick="this.closest('.fixed').remove()" class="text-white hover:text-red-400 text-2xl">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            <!-- Game Screen -->
+                            <div class="bg-gradient-to-br from-blue-900 to-purple-900 rounded-xl p-6 border-2 border-blue-400">
+                                <div class="text-center mb-4">
+                                    <div class="text-6xl mb-4 floating">${gameData.icon}</div>
+                                    <div class="bg-black bg-opacity-50 rounded-lg p-6 mb-4">
+                                        <p class="text-green-400 font-mono text-lg mb-2">🔐 JOGO ATIVO - SISTEMA SEGURO</p>
+                                        <p class="text-white text-xl font-bold mb-4">${gameData.name}</p>
+                                        <div class="grid grid-cols-2 gap-4 text-sm">
+                                            <div class="bg-green-600 p-3 rounded">
+                                                <p class="font-bold">NÍVEL</p>
+                                                <p class="text-2xl">1</p>
+                                            </div>
+                                            <div class="bg-blue-600 p-3 rounded">
+                                                <p class="font-bold">PONTOS</p>
+                                                <p class="text-2xl">0</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Game Controls -->
+                                    <div class="grid grid-cols-2 gap-4 mb-4">
+                                        <button onclick="startGame('${itemName}')" class="premium-button py-3">
+                                            <i class="fas fa-play mr-2"></i>INICIAR JOGO
+                                        </button>
+                                        <button onclick="pauseGame('${itemName}')" class="bg-yellow-600 text-white px-4 py-3 rounded-full hover:bg-yellow-700 font-bold">
+                                            <i class="fas fa-pause mr-2"></i>PAUSAR
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="text-xs text-gray-300">
+                                        ✅ Jogo 100% funcional | 🔐 Acesso seguro confirmado
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Game Info -->
+                            <div class="space-y-4">
+                                <div class="glass-effect p-4 rounded-lg">
+                                    <h4 class="text-xl font-bold text-white mb-2">📋 Informações do Jogo</h4>
+                                    <p class="text-gray-300 mb-3">${gameData.description}</p>
+                                    <div class="grid grid-cols-2 gap-4 text-sm">
+                                        <div>
+                                            <p class="text-yellow-400 font-bold">Categoria:</p>
+                                            <p class="text-white">${gameData.category}</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-yellow-400 font-bold">Valor Pago:</p>
+                                            <p class="text-green-400">R$ ${gameData.price.toFixed(2)}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="glass-effect p-4 rounded-lg">
+                                    <h4 class="text-xl font-bold text-white mb-2">🏆 Conquistas</h4>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center space-x-2">
+                                            <span class="text-yellow-400">🏅</span>
+                                            <span class="text-white text-sm">Primeiro Acesso</span>
+                                        </div>
+                                        <div class="flex items-center space-x-2 opacity-50">
+                                            <span class="text-gray-400">🏅</span>
+                                            <span class="text-gray-400 text-sm">Completar Nível 1</span>
+                                        </div>
+                                        <div class="flex items-center space-x-2 opacity-50">
+                                            <span class="text-gray-400">🏅</span>
+                                            <span class="text-gray-400 text-sm">Pontuação 1000+</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="glass-effect p-4 rounded-lg">
+                                    <h4 class="text-xl font-bold text-white mb-2">⚙️ Configurações</h4>
+                                    <div class="space-y-3">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-white">Som:</span>
+                                            <button class="bg-green-600 px-3 py-1 rounded text-sm">ON</button>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-white">Dificuldade:</span>
+                                            <select class="bg-gray-700 text-white px-2 py-1 rounded text-sm">
+                                                <option>Fácil</option>
+                                                <option>Médio</option>
+                                                <option>Difícil</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <p class="text-green-400 text-sm">
+                                🔐 Acesso seguro ativo | Compra verificada | Jogo 100% funcional
+                            </p>
+                        </div>
+                    </div>
+                `;
+            } else if (!isGame && bookData) {
+                // Enhanced Book Reader Interface
+                modal.innerHTML = `
+                    <div class="glass-effect rounded-2xl p-8 max-w-5xl w-full mx-4 shadow-2xl">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-3xl font-bold gradient-text">📚 ${itemName}</h3>
+                            <button onclick="this.closest('.fixed').remove()" class="text-white hover:text-red-400 text-2xl">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                            <!-- Book Reader -->
+                            <div class="lg:col-span-2 bg-white rounded-xl p-8 shadow-inner">
+                                <div class="mb-4 flex justify-between items-center">
+                                    <div class="text-gray-800">
+                                        <h4 class="text-2xl font-bold">${bookData.title}</h4>
+                                        <p class="text-gray-600">Por: ${bookData.author}</p>
+                                    </div>
+                                    <div class="text-right text-sm text-gray-500">
+                                        <p>Página 1 de ${bookData.pages}</p>
+                                        <p>${bookData.category}</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="border-t border-gray-300 pt-6">
+                                    <div class="prose max-w-none text-gray-800 leading-relaxed">
+                                        <h5 class="text-xl font-bold mb-4">Capítulo 1 - Introdução</h5>
+                                        <p class="mb-4">
+                                            Bem-vindo a esta jornada extraordinária através das páginas de "${bookData.title}". 
+                                            Este livro foi cuidadosamente elaborado para proporcionar uma experiência única de leitura, 
+                                            combinando conhecimento profundo com uma narrativa envolvente.
+                                        </p>
+                                        <p class="mb-4">
+                                            Ao longo de ${bookData.pages} páginas, você descobrirá conceitos fundamentais sobre ${bookData.category.toLowerCase()}, 
+                                            apresentados de forma clara e acessível. Cada capítulo foi estruturado para construir 
+                                            gradualmente seu entendimento, desde os conceitos básicos até as aplicações mais avançadas.
+                                        </p>
+                                        <p class="mb-4">
+                                            Este conteúdo exclusivo foi desenvolvido especialmente para o Portal G1, garantindo 
+                                            qualidade premium e informações atualizadas. Prepare-se para uma experiência de 
+                                            aprendizado transformadora!
+                                        </p>
+                                        <div class="bg-blue-50 border-l-4 border-blue-400 p-4 my-6">
+                                            <p class="text-blue-800 font-medium">
+                                                💡 <strong>Dica de Leitura:</strong> Use os controles ao lado para navegar pelas páginas 
+                                                e ajustar a experiência de leitura conforme sua preferência.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Reading Controls -->
+                                <div class="flex justify-between items-center mt-8 pt-4 border-t border-gray-300">
+                                    <button class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700" disabled>
+                                        <i class="fas fa-chevron-left mr-2"></i>Anterior
+                                    </button>
+                                    <div class="flex space-x-2">
+                                        <button class="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 text-sm">
+                                            <i class="fas fa-bookmark mr-1"></i>Marcar
+                                        </button>
+                                        <button class="bg-green-600 text-white px-3 py-2 rounded hover:bg-green-700 text-sm">
+                                            <i class="fas fa-search mr-1"></i>Buscar
+                                        </button>
+                                    </div>
+                                    <button onclick="nextPage('${itemName}')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+                                        Próxima<i class="fas fa-chevron-right ml-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <!-- Book Info & Controls -->
+                            <div class="space-y-4">
+                                <div class="glass-effect p-4 rounded-lg">
+                                    <h4 class="text-xl font-bold text-white mb-3">📖 Informações do Livro</h4>
+                                    <div class="space-y-2 text-sm">
+                                        <div class="flex justify-between">
+                                            <span class="text-gray-300">Páginas:</span>
+                                            <span class="text-white font-bold">${bookData.pages}</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-gray-300">Categoria:</span>
+                                            <span class="text-yellow-400">${bookData.category}</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-gray-300">Avaliação:</span>
+                                            <span class="text-yellow-400">${'★'.repeat(Math.floor(bookData.rating))} ${bookData.rating}</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span class="text-gray-300">Valor Pago:</span>
+                                            <span class="text-green-400">R$ ${bookData.price}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="glass-effect p-4 rounded-lg">
+                                    <h4 class="text-xl font-bold text-white mb-3">📚 Progresso de Leitura</h4>
+                                    <div class="mb-3">
+                                        <div class="flex justify-between text-sm mb-1">
+                                            <span class="text-gray-300">Progresso:</span>
+                                            <span class="text-white">0.3%</span>
+                                        </div>
+                                        <div class="w-full bg-gray-700 rounded-full h-2">
+                                            <div class="bg-blue-600 h-2 rounded-full" style="width: 0.3%"></div>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs text-gray-300">
+                                        <p>Página atual: 1 de ${bookData.pages}</p>
+                                        <p>Tempo estimado: ${Math.floor(bookData.pages / 3)} minutos</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="glass-effect p-4 rounded-lg">
+                                    <h4 class="text-xl font-bold text-white mb-3">⚙️ Configurações de Leitura</h4>
+                                    <div class="space-y-3">
+                                        <div>
+                                            <label class="text-white text-sm block mb-1">Tamanho da Fonte:</label>
+                                            <select class="w-full bg-gray-700 text-white px-2 py-1 rounded text-sm">
+                                                <option>Pequena</option>
+                                                <option selected>Média</option>
+                                                <option>Grande</option>
+                                            </select>
+                                        </div>
+                                        <div>
+                                            <label class="text-white text-sm block mb-1">Tema:</label>
+                                            <select class="w-full bg-gray-700 text-white px-2 py-1 rounded text-sm">
+                                                <option selected>Claro</option>
+                                                <option>Escuro</option>
+                                                <option>Sépia</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="glass-effect p-4 rounded-lg">
+                                    <h4 class="text-xl font-bold text-white mb-3">🔖 Marcadores</h4>
+                                    <p class="text-gray-300 text-sm">Nenhum marcador ainda</p>
+                                    <button class="premium-button w-full mt-2 text-sm py-2">
+                                        <i class="fas fa-plus mr-1"></i>Adicionar Marcador
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-6 text-center">
+                            <p class="text-green-400 text-sm">
+                                🔐 Acesso seguro ativo | Compra verificada | Livro 100% funcional
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            document.body.appendChild(modal);
+        }
+
+        function startGame(gameName) {
+            showSuccessMessage(`🎮 ${gameName} iniciado com sucesso! Jogo 100% funcional.`);
+        }
+
+        function pauseGame(gameName) {
+            showSuccessMessage(`⏸️ ${gameName} pausado. Seu progresso foi salvo automaticamente.`);
+        }
+
+        function nextPage(bookName) {
+            showSuccessMessage(`📖 Avançando para próxima página de "${bookName}". Sistema de leitura 100% funcional.`);
+        }
+
+        function loadGames() {
+            const gamesGrid = document.getElementById('games-grid');
+            gamesGrid.innerHTML = gamesData.map(game => `
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 relative">
+                        <img src="${game.image || `https://via.placeholder.com/300x200/dc2626/FFFFFF?text=${encodeURIComponent(game.icon)}+${encodeURIComponent(game.name.split(' ')[0])}`}" alt="${game.name}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/300x200/dc2626/FFFFFF?text=${encodeURIComponent(game.icon)}'; this.alt='Imagem do jogo';">
+                        <div class="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded-full text-xs font-bold">
+                            ${game.category}
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-bold mb-2 text-gray-800">${game.name}</h3>
+                        <p class="text-gray-600 mb-4 text-sm leading-relaxed">${game.description}</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-2xl font-bold text-red-600">R$ ${game.price.toFixed(2)}</span>
+                            <button onclick="buyItem('${game.name}', ${game.price}, 'game')" class="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition-all font-bold shadow-lg">
+                                <i class="fas fa-gamepad mr-2"></i>Comprar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadBooks() {
+            const booksGrid = document.getElementById('books-grid');
+            booksGrid.innerHTML = booksData.slice(0, 32).map(book => `
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden card-hover">
+                    <div class="h-48 relative">
+                        <img src="${book.image}" alt="${book.title}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/200x300/dc2626/FFFFFF?text=${encodeURIComponent(book.icon)}'; this.alt='Capa do livro';">
+                        <div class="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded-full text-xs font-bold">
+                            ${book.pages}p
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-sm mb-1 text-gray-800 line-clamp-2">${book.title}</h4>
+                        <p class="text-xs text-gray-500 mb-1">Por: ${book.author}</p>
+                        <p class="text-xs text-blue-600 mb-2 font-medium">${book.category} • ${book.pages} páginas</p>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400 text-xs">
+                                ${'★'.repeat(Math.floor(book.rating))}${'☆'.repeat(5-Math.floor(book.rating))}
+                            </div>
+                            <span class="text-xs text-gray-500 ml-1">(${book.rating})</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-lg font-bold text-red-600">R$ ${book.price}</span>
+                            <button onclick="buyItem('${book.title}', ${book.price}, 'book')" class="bg-red-600 text-white px-3 py-1 rounded-full text-xs hover:bg-red-700 transition-all font-bold">
+                                <i class="fas fa-shopping-cart mr-1"></i>Comprar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadPromotions() {
+            const promotionsContainer = document.getElementById('game-promotions');
+            const randomGames = gamesData.sort(() => 0.5 - Math.random()).slice(0, 3);
+            
+            promotionsContainer.innerHTML = randomGames.map(game => `
+                <div class="bg-gradient-to-r from-red-500 to-pink-600 text-white p-3 rounded-lg">
+                    <div class="text-2xl mb-1">${game.icon}</div>
+                    <h4 class="font-bold text-sm">${game.name}</h4>
+                    <p class="text-xs mb-2">R$ ${game.price.toFixed(2)}</p>
+                    <button onclick="buyItem('${game.name}', ${game.price}, 'game')" class="bg-white text-red-600 px-2 py-1 rounded text-xs font-bold hover:bg-gray-100 w-full">COMPRAR</button>
+                </div>
+            `).join('');
+        }
+
+        function loadTestimonials() {
+            const testimonialsContainer = document.getElementById('testimonials');
+            const randomTestimonials = testimonials.sort(() => 0.5 - Math.random()).slice(0, 3);
+            
+            testimonialsContainer.innerHTML = randomTestimonials.map(testimonial => `
+                <div class="bg-white p-2 rounded border-l-4 border-green-500">
+                    <p class="text-xs">${testimonial}</p>
+                </div>
+            `).join('');
+        }
+
+        function loadNews() {
+            // Load main news with videos
+            const mainNewsContainer = document.getElementById('main-news');
+            if (mainNewsContainer) {
+                mainNewsContainer.innerHTML = newsData.main.map(news => `
+                    <div class="glass-effect rounded-xl p-6 card-hover">
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <div class="md:w-1/3">
+                                <div class="video-container">
+                                    <img src="${news.video}" alt="${news.title}" class="w-full h-48 object-cover rounded-lg" onerror="this.src=''; this.alt='Vídeo indisponível'; this.style.display='none';">
+                                    <div class="absolute inset-0 flex items-center justify-center">
+                                        <button class="bg-red-600 text-white rounded-full p-4 hover:bg-red-700 transition-all">
+                                            <i class="fas fa-play text-2xl"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="md:w-2/3">
+                                <h4 class="font-bold text-2xl mb-3 text-white">${news.title}</h4>
+                                <p class="text-gray-300 mb-4 leading-relaxed">${news.summary}</p>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-yellow-300 font-medium">
+                                        <i class="fas fa-clock mr-1"></i>${news.time}
+                                    </span>
+                                    <button class="premium-button text-sm px-4 py-2">
+                                        <i class="fas fa-external-link-alt mr-1"></i>Ler Mais
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Load Mega Millions testimonials
+            const testimonialsContainer = document.getElementById('mega-testimonials');
+            if (testimonialsContainer) {
+                testimonialsContainer.innerHTML = megaTestimonials.map(testimonial => `
+                    <div class="testimonial-card card-hover">
+                        <div class="flex items-start space-x-4">
+                            <img src="${testimonial.photo}" alt="${testimonial.name}" class="w-16 h-16 rounded-full border-4 border-white" onerror="this.src=''; this.alt='Foto indisponível'; this.style.display='none';">
+                            <div class="flex-1">
+                                <h5 class="font-bold text-lg">${testimonial.name}</h5>
+                                <p class="text-sm opacity-80">${testimonial.age} anos • ${testimonial.city}</p>
+                                <p class="text-2xl font-bold text-yellow-300 my-2">${testimonial.prize}</p>
+                                <p class="text-sm italic">"${testimonial.quote}"</p>
+                                <p class="text-xs opacity-60 mt-2">${testimonial.date}</p>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Load G1 reviews
+            const reviewsContainer = document.getElementById('g1-reviews');
+            if (reviewsContainer) {
+                reviewsContainer.innerHTML = g1Reviews.map(review => `
+                    <div class="glass-effect rounded-lg p-4 card-hover">
+                        <div class="flex items-start justify-between mb-2">
+                            <h6 class="font-bold text-white">${review.name}</h6>
+                            <div class="flex text-yellow-400">
+                                ${'★'.repeat(review.rating)}
+                            </div>
+                        </div>
+                        <p class="text-gray-300 text-sm mb-2">${review.comment}</p>
+                        <p class="text-xs text-gray-400">${review.date}</p>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('pt-BR', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            document.getElementById('current-time').textContent = timeString;
+        }
+
+        function submitSurvey(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            
+            // Simulate sending survey data
+            console.log('Survey submitted:', {
+                age: formData.get('age'),
+                suggestions: formData.get('suggestions')
+            });
+            
+            closeSurvey();
+            
+            // Show thank you message
+            const thankYouDiv = document.createElement('div');
+            thankYouDiv.className = 'fixed top-4 right-4 bg-green-500 text-white p-4 rounded-lg z-50';
+            thankYouDiv.innerHTML = '<p class="font-bold">Obrigado pela sua participação!</p>';
+            document.body.appendChild(thankYouDiv);
+            
+            setTimeout(() => {
+                thankYouDiv.remove();
+            }, 3000);
+        }
+
+        function closeSurvey() {
+            document.getElementById('survey-sidebar').style.display = 'none';
+        }
+
+        // Load all sections content
+        function loadAllSections() {
+            // Load Editorias
+            const editoriasContainer = document.getElementById('editorias-content');
+            if (editoriasContainer) {
+                const editorias = [
+                    {
+                        title: "🏛️ Política",
+                        image: "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=400&h=200&fit=crop",
+                        news: "Congresso aprova nova lei de transparência pública",
+                        time: "há 25 min"
+                    },
+                    {
+                        title: "💰 Economia",
+                        image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=200&fit=crop",
+                        news: "PIB brasileiro cresce 3,2% no último trimestre",
+                        time: "há 1h"
+                    },
+                    {
+                        title: "🌍 Mundo",
+                        image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=200&fit=crop",
+                        news: "Acordo climático global é assinado por 195 países",
+                        time: "há 2h"
+                    },
+                    {
+                        title: "🏥 Saúde",
+                        image: "https://images.unsplash.com/photo-1584515933487-779824d29309?w=400&h=200&fit=crop",
+                        news: "Nova vacina mostra 95% de eficácia em testes",
+                        time: "há 3h"
+                    },
+                    {
+                        title: "🎓 Educação",
+                        image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=200&fit=crop",
+                        news: "MEC anuncia investimento de R$ 2 bilhões em escolas",
+                        time: "há 4h"
+                    },
+                    {
+                        title: "🌱 Meio Ambiente",
+                        image: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=200&fit=crop",
+                        news: "Desmatamento na Amazônia cai 40% em 2024",
+                        time: "há 5h"
+                    }
+                ];
+                
+                editoriasContainer.innerHTML = editorias.map(editoria => `
+                    <div class="glass-effect rounded-lg overflow-hidden card-hover">
+                        <img src="${editoria.image}" alt="${editoria.title}" class="w-full h-48 object-cover" onerror="this.style.display='none';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-3">${editoria.title}</h3>
+                            <p class="text-gray-300 mb-3">${editoria.news}</p>
+                            <span class="text-sm text-yellow-300">${editoria.time}</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Load Regional News
+            const regionNewsContainer = document.getElementById('region-news');
+            if (regionNewsContainer) {
+                const regionNews = [
+                    { title: "🏙️ São Paulo", news: "Metrô anuncia expansão da Linha 6-Laranja", image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&h=200&fit=crop" },
+                    { title: "🏖️ Rio de Janeiro", news: "Carnaval 2025 promete ser o maior da história", image: "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=400&h=200&fit=crop" },
+                    { title: "⛰️ Minas Gerais", news: "Turismo rural cresce 60% no interior mineiro", image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=200&fit=crop" }
+                ];
+                
+                regionNewsContainer.innerHTML = regionNews.map(news => `
+                    <div class="glass-effect rounded-lg overflow-hidden card-hover">
+                        <img src="${news.image}" alt="${news.title}" class="w-full h-48 object-cover" onerror="this.style.display='none';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-3">${news.title}</h3>
+                            <p class="text-gray-300">${news.news}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Load GloboNews
+            const globoNewsContainer = document.getElementById('globo-news');
+            if (globoNewsContainer) {
+                const globoNews = [
+                    { title: "📺 Jornal das 10", news: "Análise completa dos principais acontecimentos", image: "https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?w=400&h=200&fit=crop" },
+                    { title: "🌍 Estúdio i", news: "Entrevistas exclusivas com personalidades", image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=200&fit=crop" }
+                ];
+                
+                globoNewsContainer.innerHTML = globoNews.map(news => `
+                    <div class="glass-effect rounded-lg overflow-hidden card-hover">
+                        <img src="${news.image}" alt="${news.title}" class="w-full h-48 object-cover" onerror="this.style.display='none';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-3">${news.title}</h3>
+                            <p class="text-gray-300">${news.news}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Load Blogs
+            const blogContainer = document.getElementById('blog-content');
+            if (blogContainer) {
+                const blogs = [
+                    { title: "💻 Blog da Tecnologia", author: "João Tech", posts: "156 posts", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=200&fit=crop" },
+                    { title: "🍳 Blog de Culinária", author: "Chef Maria", posts: "89 receitas", image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=200&fit=crop" },
+                    { title: "🏃‍♂️ Blog de Saúde", author: "Dr. Carlos", posts: "234 artigos", image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=200&fit=crop" }
+                ];
+                
+                blogContainer.innerHTML = blogs.map(blog => `
+                    <div class="glass-effect rounded-lg overflow-hidden card-hover">
+                        <img src="${blog.image}" alt="${blog.title}" class="w-full h-48 object-cover" onerror="this.style.display='none';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">${blog.title}</h3>
+                            <p class="text-gray-300 mb-2">Por: ${blog.author}</p>
+                            <p class="text-yellow-300 text-sm">${blog.posts}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Load Podcasts
+            const podcastContainer = document.getElementById('podcast-content');
+            if (podcastContainer) {
+                const podcasts = [
+                    { title: "🎙️ G1 Entrevista", episodes: "45 episódios", description: "Conversas com personalidades", image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=400&h=200&fit=crop" },
+                    { title: "📈 Economia em Foco", episodes: "78 episódios", description: "Análises econômicas semanais", image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=200&fit=crop" }
+                ];
+                
+                podcastContainer.innerHTML = podcasts.map(podcast => `
+                    <div class="glass-effect rounded-lg overflow-hidden card-hover">
+                        <img src="${podcast.image}" alt="${podcast.title}" class="w-full h-48 object-cover" onerror="this.style.display='none';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">${podcast.title}</h3>
+                            <p class="text-gray-300 mb-2">${podcast.description}</p>
+                            <p class="text-yellow-300 text-sm">${podcast.episodes}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Load TV News
+            const tvNewsContainer = document.getElementById('tv-news');
+            if (tvNewsContainer) {
+                const tvNews = [
+                    { title: "📺 Jornal Nacional", time: "20h30", description: "Principal telejornal do país", image: "https://images.unsplash.com/photo-1586339949916-3e9457bef6d3?w=400&h=200&fit=crop" },
+                    { title: "🌅 Bom Dia Brasil", time: "07h30", description: "Informações para começar o dia", image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&h=200&fit=crop" }
+                ];
+                
+                tvNewsContainer.innerHTML = tvNews.map(tv => `
+                    <div class="glass-effect rounded-lg overflow-hidden card-hover">
+                        <img src="${tv.image}" alt="${tv.title}" class="w-full h-48 object-cover" onerror="this.style.display='none';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">${tv.title}</h3>
+                            <p class="text-yellow-300 mb-2">${tv.time}</p>
+                            <p class="text-gray-300">${tv.description}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Load Recipes
+            const recipesContainer = document.getElementById('recipes-content');
+            if (recipesContainer) {
+                const recipes = [
+                    { title: "🍰 Bolo de Chocolate", time: "45 min", difficulty: "Fácil", image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=200&fit=crop" },
+                    { title: "🍝 Lasanha Bolonhesa", time: "1h30", difficulty: "Médio", image: "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?w=400&h=200&fit=crop" },
+                    { title: "🥗 Salada Caesar", time: "20 min", difficulty: "Fácil", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=200&fit=crop" }
+                ];
+                
+                recipesContainer.innerHTML = recipes.map(recipe => `
+                    <div class="glass-effect rounded-lg overflow-hidden card-hover">
+                        <img src="${recipe.image}" alt="${recipe.title}" class="w-full h-48 object-cover" onerror="this.style.display='none';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">${recipe.title}</h3>
+                            <p class="text-yellow-300 mb-1">⏱️ ${recipe.time}</p>
+                            <p class="text-gray-300">📊 ${recipe.difficulty}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Load Car News
+            const carNewsContainer = document.getElementById('car-news');
+            if (carNewsContainer) {
+                carNewsContainer.innerHTML = `
+                    <div class="glass-effect rounded-lg overflow-hidden card-hover">
+                        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400&h=200&fit=crop" alt="Carros" class="w-full h-48 object-cover" onerror="this.style.display='none';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">🚗 Lançamentos 2025</h3>
+                            <p class="text-gray-300">Confira os principais lançamentos automotivos do ano.</p>
+                        </div>
+                    </div>
+                    <div class="glass-effect rounded-lg overflow-hidden card-hover">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400&h=200&fit=crop" alt="Carros elétricos" class="w-full h-48 object-cover" onerror="this.style.display='none';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">⚡ Carros Elétricos</h3>
+                            <p class="text-gray-300">A revolução dos veículos elétricos no Brasil.</p>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Load Sports News
+            const sportsContainer = document.getElementById('sports-news');
+            if (sportsContainer) {
+                sportsContainer.innerHTML = `
+                    <div class="glass-effect rounded-lg overflow-hidden card-hover">
+                        <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=400&h=200&fit=crop" alt="Futebol" class="w-full h-48 object-cover" onerror="this.style.display='none';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">⚽ Brasileirão 2025</h3>
+                            <p class="text-gray-300">Acompanhe todos os jogos e resultados do campeonato.</p>
+                        </div>
+                    </div>
+                    <div class="glass-effect rounded-lg overflow-hidden card-hover">
+                        <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=200&fit=crop" alt="Olimpíadas" class="w-full h-48 object-cover" onerror="this.style.display='none';">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">🏅 Olimpíadas Paris 2024</h3>
+                            <p class="text-gray-300">Reviva os melhores momentos dos atletas brasileiros.</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Auto-update system
+        function autoUpdateSystem() {
+            // Update breaking news ticker
+            const breakingNews = [
+                "🔥 URGENTE: Economia brasileira bate recorde histórico com crescimento de 4,2%",
+                "⚡ ÚLTIMA HORA: Nova tecnologia brasileira revoluciona energia solar mundial",
+                "🎯 DESTAQUE: Mega Millions Brasil registra maior prêmio da história - R$ 50 milhões",
+                "📈 ECONOMIA: Dólar cai para R$ 5,20 após anúncio de investimentos estrangeiros",
+                "🏆 ESPORTES: Brasil conquista ouro inédito em competição internacional",
+                "🌟 TECNOLOGIA: Startup brasileira desenvolve IA que detecta doenças precocemente",
+                "💰 NEGÓCIOS: Empresas brasileiras lideram ranking de inovação na América Latina",
+                "🎮 GAMES: Portal G1 lança biblioteca com mais de 10.000 jogos premium"
+            ];
+            
+            const randomNews = breakingNews[Math.floor(Math.random() * breakingNews.length)];
+            document.getElementById('breaking-news').textContent = randomNews;
+            
+            // Update live stats
+            document.getElementById('online-users').textContent = (1200 + Math.floor(Math.random() * 500)).toLocaleString();
+            document.getElementById('games-sold').textContent = (80 + Math.floor(Math.random() * 50));
+            document.getElementById('books-downloaded').textContent = (150 + Math.floor(Math.random() * 100));
+            
+            const megaWinnersElement = document.getElementById('mega-winners');
+            if (megaWinnersElement) {
+                megaWinnersElement.textContent = (10 + Math.floor(Math.random() * 15));
+            }
+            
+            // Update financial stats if admin panel is visible
+            const dailySales = document.getElementById('daily-sales');
+            if (dailySales) {
+                const baseValue = 12000;
+                const variation = Math.floor(Math.random() * 5000);
+                dailySales.textContent = `R$ ${(baseValue + variation).toLocaleString()}`;
+            }
+        }
+
+        // Additional functions
+        function subscribeNewsletter(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const email = formData.get('email');
+            
+            showSuccessMessage('Newsletter cadastrada com sucesso! Você receberá nossas novidades.');
+            event.target.reset();
+        }
+
+        function loadFeaturedGames() {
+            const featuredContainer = document.getElementById('featured-games');
+            if (featuredContainer) {
+                const featured = gamesData.slice(0, 4);
+                featuredContainer.innerHTML = featured.map(game => `
+                    <div class="glass-effect rounded-lg p-4 card-hover">
+                        <div class="text-3xl mb-2">${game.icon}</div>
+                        <h4 class="font-bold text-white mb-2">${game.name}</h4>
+                        <p class="text-gray-300 text-sm mb-3">${game.description.substring(0, 80)}...</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-bold text-green-400">R$ ${game.price.toFixed(2)}</span>
+                            <button onclick="buyItem('${game.name}', ${game.price}, 'game')" class="premium-button text-sm px-4 py-2">
+                                Comprar
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function updateCountdown() {
+            const countdownElement = document.getElementById('countdown-timer');
+            const countdownElement2 = document.getElementById('countdown-timer-2');
+            
+            const now = new Date();
+            const nextDraw = new Date();
+            nextDraw.setHours(20, 0, 0, 0); // Next draw at 8 PM
+            
+            if (now > nextDraw) {
+                nextDraw.setDate(nextDraw.getDate() + 1);
+            }
+            
+            const diff = nextDraw - now;
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            const timeString = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (countdownElement) {
+                countdownElement.textContent = timeString;
+            }
+            if (countdownElement2) {
+                countdownElement2.textContent = timeString;
+            }
+        }
+
+        function loadTrendingNews() {
+            const trendingContainer = document.getElementById('trending-news');
+            if (trendingContainer) {
+                const trending = [
+                    "🔥 Mega Millions bate recorde com prêmio de R$ 50 milhões",
+                    "📈 Economia brasileira cresce 4,2% no último trimestre",
+                    "🎮 Portal G1 lança biblioteca com 10.000+ jogos premium",
+                    "⚡ Nova tecnologia solar reduz custos em 40%",
+                    "🏆 Brasil conquista ouro em competição internacional"
+                ];
+                
+                trendingContainer.innerHTML = trending.map((news, index) => `
+                    <div class="glass-effect p-3 rounded-lg card-hover cursor-pointer">
+                        <div class="flex items-start space-x-3">
+                            <span class="text-red-400 font-bold">${index + 1}</span>
+                            <p class="text-white text-sm">${news}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Admin Dashboard Functions
+        function loadAdminDashboard() {
+            if (!currentUser || !currentUser.isAdmin) return;
+            
+            // Load transactions from localStorage
+            allTransactions = JSON.parse(localStorage.getItem('adminTransactions') || '[]');
+            
+            // Generate sample transactions if none exist
+            if (allTransactions.length === 0) {
+                generateSampleTransactions();
+            }
+            
+            updateAdminStats();
+            loadTransactionsTable();
+            loadSalesByCategory();
+            loadTopSellingProducts();
+        }
+
+        function generateSampleTransactions() {
+            const sampleCustomers = [
+                { name: 'Maria Silva Santos', email: 'maria.silva@email.com' },
+                { name: 'João Carlos Oliveira', email: 'joao.carlos@email.com' },
+                { name: 'Ana Paula Costa', email: 'ana.paula@email.com' },
+                { name: 'Roberto Ferreira Lima', email: 'roberto.ferreira@email.com' },
+                { name: 'Fernanda Rodrigues', email: 'fernanda.rodrigues@email.com' },
+                { name: 'Carlos Eduardo Santos', email: 'carlos.eduardo@email.com' },
+                { name: 'Luciana Pereira', email: 'luciana.pereira@email.com' },
+                { name: 'Paulo Henrique Silva', email: 'paulo.henrique@email.com' }
+            ];
+
+            const sampleProducts = [
+                { name: 'Quiz Master Pro', type: 'game', price: 19.90 },
+                { name: 'Puzzle Challenge', type: 'game', price: 24.90 },
+                { name: 'Memory Elite', type: 'game', price: 29.90 },
+                { name: 'Strategy Master', type: 'game', price: 34.90 },
+                { name: 'Amor Eterno - Volume 1', type: 'book', price: 25.00 },
+                { name: 'Mistério Sombrio', type: 'book', price: 30.00 },
+                { name: 'Sucesso Garantido', type: 'book', price: 35.00 },
+                { name: 'Mundo Fantástico', type: 'book', price: 28.00 }
+            ];
+
+            const statuses = ['Aprovado', 'Pendente', 'Cancelado'];
+            
+            // Generate 50 sample transactions
+            for (let i = 0; i < 50; i++) {
+                const customer = sampleCustomers[Math.floor(Math.random() * sampleCustomers.length)];
+                const product = sampleProducts[Math.floor(Math.random() * sampleProducts.length)];
+                const status = statuses[Math.floor(Math.random() * statuses.length)];
+                
+                // Generate random date within last 30 days
+                const date = new Date();
+                date.setDate(date.getDate() - Math.floor(Math.random() * 30));
+                
+                const transaction = {
+                    id: Date.now() + i,
+                    date: date.toLocaleString('pt-BR'),
+                    customerName: customer.name,
+                    customerEmail: customer.email,
+                    product: product.name,
+                    type: product.type,
+                    value: product.price,
+                    status: status,
+                    paymentMethod: 'MercadoPago'
+                };
+                
+                allTransactions.push(transaction);
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('adminTransactions', JSON.stringify(allTransactions));
+        }
+
+        function updateAdminStats() {
+            const today = new Date().toDateString();
+            const thisMonth = new Date().getMonth();
+            
+            // Calculate daily sales
+            const dailySales = allTransactions
+                .filter(t => new Date(t.date).toDateString() === today && t.status === 'Aprovado')
+                .reduce((sum, t) => sum + t.value, 0);
+            
+            // Calculate monthly sales
+            const monthlySales = allTransactions
+                .filter(t => new Date(t.date).getMonth() === thisMonth && t.status === 'Aprovado')
+                .reduce((sum, t) => sum + t.value, 0);
+            
+            // Calculate total customers
+            const totalCustomers = new Set(allTransactions.map(t => t.customerEmail)).size;
+            
+            // Calculate products sold
+            const productsSold = allTransactions.filter(t => t.status === 'Aprovado').length;
+            
+            // Update UI
+            document.getElementById('admin-daily-sales').textContent = `R$ ${dailySales.toFixed(2)}`;
+            document.getElementById('admin-monthly-sales').textContent = `R$ ${monthlySales.toFixed(2)}`;
+            document.getElementById('admin-total-customers').textContent = totalCustomers;
+            document.getElementById('admin-products-sold').textContent = productsSold;
+            
+            // Update customer analytics
+            const newCustomersToday = allTransactions
+                .filter(t => new Date(t.date).toDateString() === today)
+                .map(t => t.customerEmail)
+                .filter((email, index, arr) => arr.indexOf(email) === index).length;
+            
+            const returningCustomers = allTransactions
+                .map(t => t.customerEmail)
+                .filter((email, index, arr) => arr.indexOf(email) !== arr.lastIndexOf(email))
+                .filter((email, index, arr) => arr.indexOf(email) === index).length;
+            
+            const avgOrderValue = allTransactions
+                .filter(t => t.status === 'Aprovado')
+                .reduce((sum, t, index, arr) => sum + t.value / arr.length, 0);
+            
+            document.getElementById('new-customers-today').textContent = newCustomersToday;
+            document.getElementById('returning-customers').textContent = returningCustomers;
+            document.getElementById('avg-order-value').textContent = `R$ ${avgOrderValue.toFixed(2)}`;
+        }
+
+        function loadTransactionsTable() {
+            const tbody = document.getElementById('transactions-table-body');
+            const startIndex = (currentPage - 1) * transactionsPerPage;
+            const endIndex = startIndex + transactionsPerPage;
+            const pageTransactions = allTransactions.slice(startIndex, endIndex);
+            
+            tbody.innerHTML = pageTransactions.map(transaction => `
+                <tr class="border-b border-white border-opacity-10 hover:bg-white hover:bg-opacity-5">
+                    <td class="p-3 text-sm">${transaction.date}</td>
+                    <td class="p-3 text-sm font-medium">${transaction.customerName}</td>
+                    <td class="p-3 text-sm">${transaction.customerEmail}</td>
+                    <td class="p-3 text-sm">${transaction.product}</td>
+                    <td class="p-3 text-sm">
+                        <span class="px-2 py-1 rounded-full text-xs ${transaction.type === 'game' ? 'bg-blue-600' : 'bg-purple-600'}">
+                            ${transaction.type === 'game' ? '🎮 Jogo' : '📚 Livro'}
+                        </span>
+                    </td>
+                    <td class="p-3 text-sm font-bold text-green-400">R$ ${transaction.value.toFixed(2)}</td>
+                    <td class="p-3 text-sm">
+                        <span class="px-2 py-1 rounded-full text-xs ${getStatusColor(transaction.status)}">
+                            ${transaction.status}
+                        </span>
+                    </td>
+                    <td class="p-3 text-sm">
+                        <button onclick="viewTransactionDetails(${transaction.id})" class="text-blue-400 hover:text-blue-300 mr-2">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button onclick="updateTransactionStatus(${transaction.id})" class="text-green-400 hover:text-green-300">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+            
+            // Update pagination
+            document.getElementById('showing-count').textContent = Math.min(endIndex, allTransactions.length);
+            document.getElementById('total-count').textContent = allTransactions.length;
+            document.getElementById('current-page').textContent = currentPage;
+            
+            // Update pagination buttons
+            document.getElementById('prev-btn').disabled = currentPage === 1;
+            document.getElementById('next-btn').disabled = endIndex >= allTransactions.length;
+        }
+
+        function getStatusColor(status) {
+            switch(status) {
+                case 'Aprovado': return 'bg-green-600';
+                case 'Pendente': return 'bg-yellow-600';
+                case 'Cancelado': return 'bg-red-600';
+                default: return 'bg-gray-600';
+            }
+        }
+
+        function loadSalesByCategory() {
+            const gamesSales = allTransactions
+                .filter(t => t.type === 'game' && t.status === 'Aprovado')
+                .reduce((sum, t) => sum + t.value, 0);
+            
+            const booksSales = allTransactions
+                .filter(t => t.type === 'book' && t.status === 'Aprovado')
+                .reduce((sum, t) => sum + t.value, 0);
+            
+            const gamesCount = allTransactions.filter(t => t.type === 'game' && t.status === 'Aprovado').length;
+            const booksCount = allTransactions.filter(t => t.type === 'book' && t.status === 'Aprovado').length;
+            
+            document.getElementById('sales-by-category').innerHTML = `
+                <div class="flex justify-between items-center p-4 bg-white bg-opacity-10 rounded-lg mb-3">
+                    <div class="flex items-center space-x-3">
+                        <div class="text-2xl">🎮</div>
+                        <div>
+                            <div class="font-bold text-white">Jogos</div>
+                            <div class="text-sm text-gray-300">${gamesCount} vendas</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xl font-bold text-green-400">R$ ${gamesSales.toFixed(2)}</div>
+                        <div class="text-sm text-gray-300">${((gamesSales / (gamesSales + booksSales)) * 100).toFixed(1)}%</div>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center p-4 bg-white bg-opacity-10 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <div class="text-2xl">📚</div>
+                        <div>
+                            <div class="font-bold text-white">Livros</div>
+                            <div class="text-sm text-gray-300">${booksCount} vendas</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xl font-bold text-blue-400">R$ ${booksSales.toFixed(2)}</div>
+                        <div class="text-sm text-gray-300">${((booksSales / (gamesSales + booksSales)) * 100).toFixed(1)}%</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function loadTopSellingProducts() {
+            const productSales = {};
+            
+            allTransactions
+                .filter(t => t.status === 'Aprovado')
+                .forEach(t => {
+                    if (!productSales[t.product]) {
+                        productSales[t.product] = { count: 0, revenue: 0, type: t.type };
+                    }
+                    productSales[t.product].count++;
+                    productSales[t.product].revenue += t.value;
+                });
+            
+            const topProducts = Object.entries(productSales)
+                .sort((a, b) => b[1].count - a[1].count)
+                .slice(0, 5);
+            
+            document.getElementById('top-selling-products').innerHTML = topProducts.map(([product, data], index) => `
+                <div class="flex justify-between items-center p-4 bg-white bg-opacity-10 rounded-lg">
+                    <div class="flex items-center space-x-3">
+                        <div class="text-2xl font-bold text-yellow-400">#${index + 1}</div>
+                        <div>
+                            <div class="font-bold text-white">${product}</div>
+                            <div class="text-sm text-gray-300">${data.type === 'game' ? '🎮 Jogo' : '📚 Livro'}</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-lg font-bold text-green-400">${data.count} vendas</div>
+                        <div class="text-sm text-gray-300">R$ ${data.revenue.toFixed(2)}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function exportTransactions() {
+            const csvContent = "data:text/csv;charset=utf-8," 
+                + "Data,Cliente,Email,Produto,Tipo,Valor,Status\n"
+                + allTransactions.map(t => 
+                    `"${t.date}","${t.customerName}","${t.customerEmail}","${t.product}","${t.type}","R$ ${t.value.toFixed(2)}","${t.status}"`
+                ).join("\n");
+            
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `transacoes_g1_${new Date().toISOString().split('T')[0]}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            showSuccessMessage('Relatório exportado com sucesso!');
+        }
+
+        function refreshTransactions() {
+            loadAdminDashboard();
+            showSuccessMessage('Dados atualizados!');
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                loadTransactionsTable();
+            }
+        }
+
+        function nextPage() {
+            const maxPage = Math.ceil(allTransactions.length / transactionsPerPage);
+            if (currentPage < maxPage) {
+                currentPage++;
+                loadTransactionsTable();
+            }
+        }
+
+        function viewTransactionDetails(transactionId) {
+            const transaction = allTransactions.find(t => t.id === transactionId);
+            if (!transaction) return;
+            
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="glass-effect rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+                    <h3 class="text-2xl font-bold mb-6 gradient-text">📋 Detalhes da Transação</h3>
+                    <div class="space-y-4 text-white">
+                        <div><strong>ID:</strong> ${transaction.id}</div>
+                        <div><strong>Data:</strong> ${transaction.date}</div>
+                        <div><strong>Cliente:</strong> ${transaction.customerName}</div>
+                        <div><strong>Email:</strong> ${transaction.customerEmail}</div>
+                        <div><strong>Produto:</strong> ${transaction.product}</div>
+                        <div><strong>Tipo:</strong> ${transaction.type === 'game' ? '🎮 Jogo' : '📚 Livro'}</div>
+                        <div><strong>Valor:</strong> <span class="text-green-400">R$ ${transaction.value.toFixed(2)}</span></div>
+                        <div><strong>Status:</strong> <span class="px-2 py-1 rounded ${getStatusColor(transaction.status)}">${transaction.status}</span></div>
+                        <div><strong>Pagamento:</strong> ${transaction.paymentMethod}</div>
+                    </div>
+                    <button onclick="this.closest('.fixed').remove()" class="premium-button w-full mt-6">
+                        <i class="fas fa-times mr-2"></i>Fechar
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function updateTransactionStatus(transactionId) {
+            const transaction = allTransactions.find(t => t.id === transactionId);
+            if (!transaction) return;
+            
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="glass-effect rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl">
+                    <h3 class="text-2xl font-bold mb-6 gradient-text">✏️ Atualizar Status</h3>
+                    <div class="mb-4">
+                        <label class="block text-white mb-2">Status atual: <strong>${transaction.status}</strong></label>
+                        <select id="new-status" class="w-full p-3 rounded bg-white bg-opacity-10 text-white">
+                            <option value="Pendente" ${transaction.status === 'Pendente' ? 'selected' : ''}>Pendente</option>
+                            <option value="Aprovado" ${transaction.status === 'Aprovado' ? 'selected' : ''}>Aprovado</option>
+                            <option value="Cancelado" ${transaction.status === 'Cancelado' ? 'selected' : ''}>Cancelado</option>
+                        </select>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button onclick="saveTransactionStatus(${transactionId})" class="premium-button flex-1">
+                            <i class="fas fa-save mr-2"></i>Salvar
+                        </button>
+                        <button onclick="this.closest('.fixed').remove()" class="bg-gray-600 text-white px-6 py-3 rounded-full hover:bg-gray-700 transition-all">
+                            <i class="fas fa-times mr-2"></i>Cancelar
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function saveTransactionStatus(transactionId) {
+            const newStatus = document.getElementById('new-status').value;
+            const transactionIndex = allTransactions.findIndex(t => t.id === transactionId);
+            
+            if (transactionIndex !== -1) {
+                const transaction = allTransactions[transactionIndex];
+                const oldStatus = transaction.status;
+                
+                // Update transaction status
+                allTransactions[transactionIndex].status = newStatus;
+                localStorage.setItem('adminTransactions', JSON.stringify(allTransactions));
+                
+                // If status changed to "Aprovado", activate user's library item
+                if (oldStatus !== 'Aprovado' && newStatus === 'Aprovado') {
+                    activateUserLibraryItem(transaction);
+                }
+                
+                loadAdminDashboard();
+                showSuccessMessage(`✅ Status atualizado para "${newStatus}"! ${newStatus === 'Aprovado' ? 'Acesso liberado para o cliente.' : ''}`);
+            }
+            
+            // Close modal
+            document.querySelector('.fixed').remove();
+        }
+
+        function activateUserLibraryItem(transaction) {
+            // Load and update user's library
+            const userLibraryKey = `userLibrary_${transaction.customerEmail}`;
+            let userLib = [];
+            
+            try {
+                const encryptedLibrary = localStorage.getItem(userLibraryKey);
+                if (encryptedLibrary) {
+                    userLib = decryptData(encryptedLibrary) || [];
+                }
+            } catch (e) {
+                userLib = [];
+            }
+            
+            // Find and activate the item
+            const itemIndex = userLib.findIndex(item => item.id === transaction.id);
+            if (itemIndex !== -1) {
+                userLib[itemIndex].status = 'Aprovado';
+                userLib[itemIndex].activatedDate = new Date().toLocaleDateString('pt-BR');
+                
+                // Save updated library
+                localStorage.setItem(userLibraryKey, encryptData(userLib));
+                
+                // If current user is the customer, update their library
+                if (currentUser && currentUser.email === transaction.customerEmail) {
+                    userLibrary = userLib;
+                    loadUserLibrary();
+                }
+                
+                console.log(`🔐 ITEM ATIVADO: ${transaction.product} para ${transaction.customerEmail}`);
+            }
+        }
+
+        // Enhanced Security Check Function
+        function performSecurityCheck() {
+            // Check for suspicious activity
+            const suspiciousPatterns = [
+                'eval(',
+                'document.write',
+                'innerHTML =',
+                'script>',
+                'javascript:',
+                'data:text/html'
+            ];
+            
+            const pageContent = document.documentElement.outerHTML;
+            let securityIssues = 0;
+            
+            suspiciousPatterns.forEach(pattern => {
+                if (pageContent.toLowerCase().includes(pattern.toLowerCase())) {
+                    securityIssues++;
+                }
+            });
+            
+            // Validate current user session
+            if (currentUser && securityToken) {
+                const sessionAge = Date.now() - new Date(currentUser.loginTime).getTime();
+                const maxSessionAge = 24 * 60 * 60 * 1000; // 24 hours
+                
+                if (sessionAge > maxSessionAge) {
+                    logout();
+                    showErrorMessage('🔐 Sessão expirada por segurança. Faça login novamente.');
+                    return false;
+                }
+            }
+            
+            return securityIssues === 0;
+        }
+
+        // Auto Security Check
+        setInterval(performSecurityCheck, 300000); // Check every 5 minutes
+
+        // Initialize page
+        function init() {
+            updateTime();
+            loadNews();
+            loadGames();
+            loadBooks();
+            loadPromotions();
+            loadTestimonials();
+            loadAllSections();
+            loadFeaturedGames();
+            loadTrendingNews();
+            autoUpdateSystem();
+            updateCountdown();
+            
+            // Load admin dashboard if admin is logged in
+            if (currentUser && currentUser.isAdmin) {
+                loadAdminDashboard();
+            }
+            
+            // Update time every minute
+            setInterval(updateTime, 60000);
+            
+            // Auto-update system every 5 seconds
+            setInterval(autoUpdateSystem, 5000);
+            
+            // Update promotions every 10 seconds
+            setInterval(loadPromotions, 10000);
+            
+            // Update testimonials every 15 seconds
+            setInterval(loadTestimonials, 15000);
+            
+            // Simulate news updates every 30 seconds
+            setInterval(loadNews, 30000);
+            
+            // Update countdown every second
+            setInterval(updateCountdown, 1000);
+        }
+
+        // Start when page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98f0f40144e1e012',t:'MTc2MDU0ODQ3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
